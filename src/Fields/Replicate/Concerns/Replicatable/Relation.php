@@ -7,7 +7,7 @@ use Mpietrucha\Nova\Fields\Replicate\Concerns\Replicatable;
 
 trait Relation
 {
-    use Cloneable\Relations, Replicatable;
+    use Cloneable\Relation, Replicatable;
 
     /**
      * @var array<string, string>

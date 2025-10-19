@@ -4,7 +4,7 @@ namespace Mpietrucha\Nova\Fields\File\Concerns;
 
 use Laravel\Nova\Fields\Field;
 use Mpietrucha\Nova\Fields\Concerns\InteractsWithRequest;
-use Mpietrucha\Nova\Fields\Text;
+use Mpietrucha\Nova\Fields\File\Proxy;
 
 trait InteractsWithExternal
 {
@@ -12,14 +12,13 @@ trait InteractsWithExternal
 
     public function external(): Field
     {
-        // $this->store();
-        // $this->download()
-        // $this->delete()
+        $this->preview($callback = fn () => $this->value);
+        $this->thumbnail($callback);
 
         if (static::request()->isPresentationRequest()) {
             return $this;
         }
 
-        return Text::replicate($this);
+        return Proxy::replicate($this);
     }
 }

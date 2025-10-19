@@ -7,20 +7,12 @@ use Mpietrucha\Nova\Fields\Clone\Concerns\Cloneable;
 use Mpietrucha\Nova\Fields\Clone\Properties;
 use Mpietrucha\Nova\Fields\Replicate\Methods;
 use Mpietrucha\Utility\Arr;
+use Mpietrucha\Utility\Instance\Property;
+use Mpietrucha\Utility\Normalizer;
 
 trait Replicatable
 {
     use Cloneable;
-
-    /**
-     * @var array<string, string>
-     */
-    protected static array $replicate = [];
-
-    /**
-     * @var array<string, string>
-     */
-    protected static array $replicatable = [];
 
     public static function replicate(Field $source): static
     {
@@ -38,6 +30,16 @@ trait Replicatable
      */
     protected static function replicatable(): array
     {
-        return [static::$replicatable, static::$replicate] |> Arr::flatten(...);
+        $replicatable = match (true) { /** @phpstan-ignore-next-line staticProperty.notFound */
+            Property::exists(static::class, 'replicatable') => static::$replicatable,
+            default => []
+        } |> Normalizer::array(...);
+
+        $replicate = match (true) { /** @phpstan-ignore-next-line staticProperty.notFound */
+            Property::exists(static::class, 'replicate') => static::$replicate,
+            default => []
+        } |> Normalizer::array(...);
+
+        return [$replicatable, $replicate] |> Arr::flatten(...);
     }
 }
