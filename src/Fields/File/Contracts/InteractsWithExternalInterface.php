@@ -2,10 +2,11 @@
 
 namespace Mpietrucha\Nova\Fields\File\Contracts;
 
-use Laravel\Nova\Fields\Field;
 use Mpietrucha\Nova\Fields\Contracts\InteractsWithRequestInterface;
+use Mpietrucha\Nova\Fields\File;
+use Mpietrucha\Nova\Fields\File\Proxy;
 
 interface InteractsWithExternalInterface extends InteractsWithRequestInterface
 {
-    public function external(): Field;
+    public function external(): File|Proxy;
 }

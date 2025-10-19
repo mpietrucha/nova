@@ -2,15 +2,15 @@
 
 namespace Mpietrucha\Nova\Fields\File\Concerns;
 
-use Laravel\Nova\Fields\Field;
 use Mpietrucha\Nova\Fields\Concerns\InteractsWithRequest;
+use Mpietrucha\Nova\Fields\File;
 use Mpietrucha\Nova\Fields\File\Proxy;
 
 trait InteractsWithExternal
 {
     use InteractsWithRequest;
 
-    public function external(): Field
+    public function external(): File|Proxy
     {
         $this->preview($callback = fn () => $this->value);
         $this->thumbnail($callback);

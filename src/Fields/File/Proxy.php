@@ -4,6 +4,9 @@ namespace Mpietrucha\Nova\Fields\File;
 
 use Mpietrucha\Nova\Fields\Text;
 
+/**
+ * @mixin \Mpietrucha\Nova\Fields\File
+ */
 class Proxy extends Text
 {
     /**
