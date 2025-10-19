@@ -10,6 +10,9 @@ use Mpietrucha\Utility\Arr;
 use Mpietrucha\Utility\Instance\Property;
 use Mpietrucha\Utility\Normalizer;
 
+/**
+ * phpstan-require-implements \Mpietrucha\Nova\Fields\Replicate\Contracts\ReplicatableInterface
+ */
 trait Replicatable
 {
     use Cloneable;

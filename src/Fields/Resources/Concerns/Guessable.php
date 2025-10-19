@@ -4,6 +4,9 @@ namespace Mpietrucha\Nova\Fields\Resources\Concerns;
 
 use Mpietrucha\Nova\Fields\Resources\Guesser;
 
+/**
+ * phpstan-require-extends \Laravel\Nova\Fields\BelongsTo|\Laravel\Nova\Fields\BelongsToMany|\Laravel\Nova\Fields\HasMany
+ */
 trait Guessable
 {
     /**

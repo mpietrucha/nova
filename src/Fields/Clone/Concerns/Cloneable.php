@@ -8,6 +8,9 @@ use Mpietrucha\Utility\Arr;
 use Mpietrucha\Utility\Instance\Property;
 use Mpietrucha\Utility\Normalizer;
 
+/**
+ * phpstan-require-implements \Mpietrucha\Nova\Fields\Clone\Contracts\CloneableInterface
+ */
 trait Cloneable
 {
     public static function clone(Field $source): static

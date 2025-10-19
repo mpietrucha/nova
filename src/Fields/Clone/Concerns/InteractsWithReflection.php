@@ -8,6 +8,8 @@ use Mpietrucha\Utility\Reflection;
 
 /**
  * @internal
+ *
+ * phpstan-require-implements \Mpietrucha\Nova\Fields\Clone\Contracts\InteractsWithReflectionInterface
  */
 trait InteractsWithReflection
 {
