@@ -25,7 +25,7 @@ class BelongsToMany extends \Laravel\Nova\Fields\BelongsToMany implements Arraya
 
     public function tag(): Tag
     {
-        return $this->configurator(...) |> Tag::replicate($this)->displayAsList()->withPreview()->tap(...);
+        return $this->configurator(...) |> Tag::replicate($this)->displayAsList()->tap(...);
     }
 
     public function toArray(): array
