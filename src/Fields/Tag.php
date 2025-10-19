@@ -2,6 +2,7 @@
 
 namespace Mpietrucha\Nova\Fields;
 
+use Laravel\Nova\Fields\SupportsWithTrashedRelatables;
 use Mpietrucha\Nova\Fields\Concerns\InteractsWithRequest;
 use Mpietrucha\Nova\Fields\Contracts\InteractsWithRequestInterface;
 use Mpietrucha\Nova\Fields\Replicate\Concerns\Replicatable;
@@ -12,7 +13,7 @@ use Mpietrucha\Utility\Contracts\CompatibleInterface;
 
 class Tag extends \Laravel\Nova\Fields\Tag implements CompatibleInterface, InteractsWithRequestInterface, ReplicatableInterface
 {
-    use Compatible, Guessable, InteractsWithRequest, Replicatable\Relation;
+    use Compatible, Guessable, InteractsWithRequest, Replicatable\Relation, SupportsWithTrashedRelatables;
 
     /**
      * @var array<string, string>
@@ -30,6 +31,10 @@ class Tag extends \Laravel\Nova\Fields\Tag implements CompatibleInterface, Inter
         }
 
         if ($request->boolean('relatable')) {
+            return false;
+        }
+
+        if ($request->isPresentationRequest()) {
             return false;
         }
 

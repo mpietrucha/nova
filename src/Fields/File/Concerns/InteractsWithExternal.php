@@ -2,12 +2,8 @@
 
 namespace Mpietrucha\Nova\Fields\File\Concerns;
 
-use Mpietrucha\Nova\Fields\Audio;
-use Mpietrucha\Nova\Fields\Avatar;
 use Mpietrucha\Nova\Fields\Concerns\InteractsWithRequest;
-use Mpietrucha\Nova\Fields\File;
-use Mpietrucha\Nova\Fields\File\Proxy;
-use Mpietrucha\Nova\Fields\Image;
+use Mpietrucha\Nova\Fields\File\External;
 
 /**
  * phpstan-require-implements \Mpietrucha\Nova\Fields\File\Contracts\InteractsWithExternalInterface
@@ -16,7 +12,7 @@ trait InteractsWithExternal
 {
     use InteractsWithRequest;
 
-    public function external(): Audio|Avatar|File|Image|Proxy
+    public function external(): External|static
     {
         $this->preview($callback = fn () => $this->value);
         $this->thumbnail($callback);
@@ -25,6 +21,6 @@ trait InteractsWithExternal
             return $this;
         }
 
-        return Proxy::replicate($this);
+        return External::replicate($this);
     }
 }

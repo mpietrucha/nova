@@ -7,6 +7,7 @@ use Mpietrucha\Nova\Fields\Clone\Concerns\InteractsWithReflection;
 use Mpietrucha\Nova\Fields\Clone\Contracts\InteractsWithReflectionInterface;
 use Mpietrucha\Utility\Concerns\Creatable;
 use Mpietrucha\Utility\Contracts\CreatableInterface;
+use Mpietrucha\Utility\Value;
 
 class Replicator implements CreatableInterface, InteractsWithReflectionInterface
 {
@@ -23,11 +24,13 @@ class Replicator implements CreatableInterface, InteractsWithReflectionInterface
             return;
         }
 
-        $this->closure($method)->call($this->field(), $value);
+        $evaluation = $this->closure($method) |> Value::for(...);
+
+        $evaluation->get($value);
     }
 
     protected function closure(string $method): Closure
     {
-        return $this->reflection()->getMethod($method)->getClosure();
+        return $this->field() |> $this->reflection()->getMethod($method)->getClosure(...);
     }
 }

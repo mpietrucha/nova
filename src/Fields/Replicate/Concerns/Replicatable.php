@@ -43,6 +43,6 @@ trait Replicatable
             default => []
         } |> Normalizer::array(...);
 
-        return [$replicatable, $replicate] |> Arr::flatten(...);
+        return [$replicatable, $replicate] |> Arr::collapse(...);
     }
 }

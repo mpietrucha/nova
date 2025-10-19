@@ -5,9 +5,10 @@ namespace Mpietrucha\Nova\Fields\File;
 use Mpietrucha\Nova\Fields\Text;
 
 /**
- * @mixin \Mpietrucha\Nova\Fields\File
+ * @mixin \Mpietrucha\Nova\Fields\Audio
+ * @mixin \Mpietrucha\Nova\Fields\Avatar
  */
-class Proxy extends Text
+class External extends Text
 {
     /**
      * @param  string  $method
