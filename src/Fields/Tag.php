@@ -10,6 +10,7 @@ use Mpietrucha\Nova\Fields\Replicate\Contracts\ReplicatableInterface;
 use Mpietrucha\Nova\Fields\Resources\Concerns\Guessable;
 use Mpietrucha\Utility\Concerns\Compatible;
 use Mpietrucha\Utility\Contracts\CompatibleInterface;
+use Mpietrucha\Utility\Normalizer;
 
 class Tag extends \Laravel\Nova\Fields\Tag implements CompatibleInterface, InteractsWithRequestInterface, ReplicatableInterface
 {
@@ -24,20 +25,14 @@ class Tag extends \Laravel\Nova\Fields\Tag implements CompatibleInterface, Inter
 
     protected static function compatibility(): bool
     {
-        $request = static::request();
-
-        if ($request->isInlineCreateRequest()) {
+        if (static::request()->isInlineCreateRequest()) {
             return false;
         }
 
-        if ($request->boolean('relatable')) {
+        if (static::request()->boolean('relatable')) {
             return false;
         }
 
-        if ($request->isPresentationRequest()) {
-            return false;
-        }
-
-        return true;
+        return static::request()->isPresentationRequest() |> Normalizer::not(...);
     }
 }

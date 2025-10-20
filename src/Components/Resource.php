@@ -10,6 +10,7 @@ use Mpietrucha\Utility\Concerns\Creatable;
 use Mpietrucha\Utility\Concerns\Tappable;
 use Mpietrucha\Utility\Contracts\CreatableInterface;
 use Mpietrucha\Utility\Enumerable\Contracts\EnumerableInterface;
+use Mpietrucha\Utility\Normalizer;
 use Symfony\Component\HttpFoundation\Response;
 
 class Resource implements CreatableInterface, ResourceInterface
@@ -111,8 +112,10 @@ class Resource implements CreatableInterface, ResourceInterface
             return true;
         }
 
-        $route = $request->route();
+        if (Arr::contains($routes, $request->route()->getName())) {
+            return true;
+        }
 
-        return Arr::contains($routes, $route->getName());
+        return Arr::first($routes, $request->is(...)) |> Normalizer::boolean(...);
     }
 }
