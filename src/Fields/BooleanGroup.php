@@ -2,8 +2,6 @@
 
 namespace Mpietrucha\Nova\Fields;
 
-use Mpietrucha\Nova\Fields\Enum\Builder;
-
 class BooleanGroup extends \Laravel\Nova\Fields\BooleanGroup
 {
     /**
@@ -23,7 +21,7 @@ class BooleanGroup extends \Laravel\Nova\Fields\BooleanGroup
     protected function serializeOptions(): array
     {
         /** @phpstan-ignore-next-line return.type */
-        return Builder::options(
+        return Options::build(
             $this->optionsCallback,
             'name',
             'label',
