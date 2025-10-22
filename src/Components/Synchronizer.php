@@ -5,6 +5,8 @@ namespace Mpietrucha\Nova\Components;
 use Illuminate\Http\Response;
 use Laravel\Nova\Asset;
 use Mpietrucha\Nova\Components\Contracts\TagInterface;
+use Mpietrucha\Nova\Components\Tag\Script;
+use Mpietrucha\Nova\Components\Tag\Style;
 use Mpietrucha\Utility\Arr;
 use Mpietrucha\Utility\Collection;
 use Mpietrucha\Utility\Filesystem;
@@ -53,8 +55,8 @@ class Synchronizer extends Propagator
     {
         /** @phpstan-ignore-next-line match.unhandled */
         return match (true) {
-            $this->style($asset) => Tag\Style::create($asset),
-            $this->script($asset) => Tag\Script::create($asset),
+            $this->style($asset) => Style::create($asset),
+            $this->script($asset) => Script::create($asset),
         };
     }
 

@@ -3,6 +3,7 @@
 namespace Mpietrucha\Nova\Fields\Resources;
 
 use Mpietrucha\Utility\Instance;
+use Mpietrucha\Utility\Instance\Path;
 use Mpietrucha\Utility\Str;
 use Mpietrucha\Utility\Type;
 
@@ -20,7 +21,7 @@ abstract class Guesser
             return $resource;
         }
 
-        $resource = Instance\Path::join(
+        $resource = Path::join(
             app()->getNamespace(),
             'Nova',
             'Resources',

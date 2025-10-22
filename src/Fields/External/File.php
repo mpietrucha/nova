@@ -6,6 +6,8 @@ use Mpietrucha\Nova\Fields\Concerns\InteractsWithRequest;
 use Mpietrucha\Nova\Fields\Contracts\InteractsWithRequestInterface;
 use Mpietrucha\Nova\Fields\External\Contracts\InteractsWithExternalInterface;
 use Mpietrucha\Nova\Fields\External\Contracts\PropertyInterface;
+use Mpietrucha\Nova\Fields\External\Property\Preview;
+use Mpietrucha\Nova\Fields\External\Property\Thumbnail;
 use Mpietrucha\Nova\Fields\Text;
 use Mpietrucha\Utility\Concerns\Compatible;
 use Mpietrucha\Utility\Contracts\CompatibleInterface;
@@ -34,12 +36,12 @@ class File extends Text implements CompatibleInterface, InteractsWithRequestInte
 
     public static function preview(InteractsWithExternalInterface $field): PropertyInterface
     {
-        return Property\Preview::create($field);
+        return Preview::create($field);
     }
 
     public static function thumbnail(InteractsWithExternalInterface $field): PropertyInterface
     {
-        return Property\Thumbnail::create($field);
+        return Thumbnail::create($field);
     }
 
     protected static function compatibility(): bool
