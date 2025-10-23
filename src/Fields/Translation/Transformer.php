@@ -28,7 +28,7 @@ abstract class Transformer implements CompatibleInterface, CreatableInterface
     {
         $translations = Encoder::create() |> Collection::create($translations)->map(...);
 
-        return $translations->flatten()->all();
+        return $translations->collapse()->all();
     }
 
     /**
@@ -39,7 +39,7 @@ abstract class Transformer implements CompatibleInterface, CreatableInterface
     {
         $translations = Decoder::create() |> Collection::create($translations)->map(...);
 
-        return $translations->all();
+        return $translations->values()->all();
     }
 
     public static function hydrate(mixed $model, string $attribute): string

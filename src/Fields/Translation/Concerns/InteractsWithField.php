@@ -14,10 +14,16 @@ trait InteractsWithField
     public function __construct()
     {
         parent::__construct(static::name(), static::property());
+
+        $this->configure();
     }
 
     public static function name(): string
     {
         return static::utilize();
+    }
+
+    protected function configure(): void
+    {
     }
 }

@@ -19,8 +19,6 @@ class Translation extends \Laravel\Nova\Fields\Repeater implements InteractsWith
 
     protected ?Text $text = null;
 
-    protected ?Select $select = null;
-
     protected ?Repeatable $repeatable = null;
 
     public function __construct(string $name, ?string $attribute = null)
@@ -31,6 +29,8 @@ class Translation extends \Laravel\Nova\Fields\Repeater implements InteractsWith
         $this->showOnDetail();
 
         $this->repeatable() |> Arr::overlap(...) |> $this->repeatables(...);
+
+        $this->required()->rules('required');
     }
 
     /**
@@ -38,16 +38,26 @@ class Translation extends \Laravel\Nova\Fields\Repeater implements InteractsWith
      */
     public function languages(callable|iterable|string $languages): static
     {
-        $this->select()->options($languages); /** @phpstan-ignore argument.type */
+        Select::languages($languages);
 
         return $this;
     }
 
     public function default(mixed $default): static
     {
-        $this->select()->default($default);
+        Select::language($default);
 
         return $this;
+    }
+
+    /**
+     * @phpstan-ignore-next-line missingType.iterableValue
+     */
+    public function resolve(mixed $model, ?string $attribute = null): void
+    {
+        static::request()->isPresentationRequest() && $this->text()->resolve($model, $attribute);
+
+        parent::resolve($model, $attribute);
     }
 
     public function jsonSerialize(): array
@@ -80,13 +90,8 @@ class Translation extends \Laravel\Nova\Fields\Repeater implements InteractsWith
         return $this->text ??= Text::make(); /** @phpstan-ignore arguments.count */
     }
 
-    protected function select(): Select
-    {
-        return $this->select ??= Select::make(); /** @phpstan-ignore arguments.count */
-    }
-
     protected function repeatable(): Repeatable
     {
-        return $this->repeatable ??= $this->select() |> Repeatable::make()->select(...);
+        return $this->repeatable ??= Repeatable::make();
     }
 }
