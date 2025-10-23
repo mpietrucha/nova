@@ -26,12 +26,12 @@ trait Cloneable
      */
     protected static function cloneable(): array
     {
-        $cloneable = match (true) { /** @phpstan-ignore-next-line staticProperty.notFound */
+        $cloneable = match (true) {
             Property::exists(static::class, 'cloneable') => static::$cloneable,
             default => []
         } |> Normalizer::array(...);
 
-        $clone = match (true) { /** @phpstan-ignore-next-line staticProperty.notFound */
+        $clone = match (true) {
             Property::exists(static::class, 'clone') => static::$clone,
             default => []
         } |> Normalizer::array(...);

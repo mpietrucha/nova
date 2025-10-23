@@ -1,6 +1,6 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields\Resources;
+namespace Mpietrucha\Nova\Fields\Resource;
 
 use Mpietrucha\Utility\Instance;
 use Mpietrucha\Utility\Instance\Path;

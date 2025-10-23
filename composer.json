@@ -12,7 +12,8 @@
     ],
     "require": {
         "php": "^8.5",
-        "mpietrucha/utility": "^1.0"
+        "mpietrucha/utility": "^1.0",
+        "spatie/laravel-translatable": "^6.11"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "dev-main",

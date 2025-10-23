@@ -48,10 +48,8 @@ class Append
             return;
         }
 
-        /** @phpstan-ignore-next-line */
         static::serve(...) |> Nova::serving(...);
 
-        /** @phpstan-ignore-next-line */
         static::synchronize(...) |> Event::listen(...);
     }
 

@@ -33,12 +33,12 @@ trait Replicatable
      */
     protected static function replicatable(): array
     {
-        $replicatable = match (true) { /** @phpstan-ignore-next-line staticProperty.notFound */
+        $replicatable = match (true) {
             Property::exists(static::class, 'replicatable') => static::$replicatable,
             default => []
         } |> Normalizer::array(...);
 
-        $replicate = match (true) { /** @phpstan-ignore-next-line staticProperty.notFound */
+        $replicate = match (true) {
             Property::exists(static::class, 'replicate') => static::$replicate,
             default => []
         } |> Normalizer::array(...);

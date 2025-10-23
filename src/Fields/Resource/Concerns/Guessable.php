@@ -1,8 +1,8 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields\Resources\Concerns;
+namespace Mpietrucha\Nova\Fields\Resource\Concerns;
 
-use Mpietrucha\Nova\Fields\Resources\Guesser;
+use Mpietrucha\Nova\Fields\Resource\Guesser;
 
 /**
  * phpstan-require-implements \Laravel\Nova\Contracts\RelatableField
