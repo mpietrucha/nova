@@ -7,7 +7,6 @@ use Mpietrucha\Nova\Fields\Concerns\InteractsWithRequest;
 use Mpietrucha\Nova\Fields\Contracts\InteractsWithRequestInterface;
 use Mpietrucha\Nova\Fields\Translation\Repeatable;
 use Mpietrucha\Nova\Fields\Translation\Select;
-use Mpietrucha\Nova\Fields\Translation\Text;
 use Mpietrucha\Nova\Fields\Translation\Transformer;
 use Mpietrucha\Utility\Arr;
 
@@ -87,7 +86,7 @@ class Translation extends \Laravel\Nova\Fields\Repeater implements InteractsWith
 
     protected function text(): Text
     {
-        return $this->text ??= Text::make(); /** @phpstan-ignore arguments.count */
+        return $this->text ??= Text::replicate($this);
     }
 
     protected function repeatable(): Repeatable
