@@ -3,6 +3,7 @@
 namespace Mpietrucha\Nova\Fields\Media\External;
 
 use Mpietrucha\Nova\Fields\Concerns\InteractsWithRequest;
+use Mpietrucha\Nova\Fields\Concerns\Proxyable;
 use Mpietrucha\Nova\Fields\Contracts\InteractsWithRequestInterface;
 use Mpietrucha\Nova\Fields\Media\Contracts\InteractsWithExternalInterface;
 use Mpietrucha\Nova\Fields\Media\External\Contracts\PropertyInterface;
@@ -17,20 +18,7 @@ use Mpietrucha\Utility\Normalizer;
  */
 class File extends Text implements CompatibleInterface, InteractsWithRequestInterface
 {
-    use Compatible, InteractsWithRequest;
-
-    /**
-     * @param  string  $method
-     * @param  array<array-key, mixed>  $arguments
-     */
-    public function __call($method, $arguments): static
-    {
-        if (static::hasMacro($method)) {
-            return parent::__call($method, $arguments);
-        }
-
-        return $this;
-    }
+    use Compatible, InteractsWithRequest, Proxyable;
 
     public static function preview(InteractsWithExternalInterface $field): PropertyInterface
     {
