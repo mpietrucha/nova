@@ -1,9 +1,9 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields\External\Concerns;
+namespace Mpietrucha\Nova\Fields\Media\Concerns;
 
 use Mpietrucha\Nova\Fields\Concerns\InteractsWithRequest;
-use Mpietrucha\Nova\Fields\External\File;
+use Mpietrucha\Nova\Fields\Media\External\File;
 
 /**
  * phpstan-require-implements \Mpietrucha\Nova\Fields\File\Contracts\InteractsWithExternalInterface

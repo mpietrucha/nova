@@ -1,8 +1,6 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields\External\Property;
-
-use Mpietrucha\Nova\Fields\External\Property;
+namespace Mpietrucha\Nova\Fields\Media\External;
 
 class Preview extends Property
 {

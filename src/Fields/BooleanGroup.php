@@ -2,6 +2,8 @@
 
 namespace Mpietrucha\Nova\Fields;
 
+use Mpietrucha\Nova\Fields\Enum\Options;
+
 class BooleanGroup extends \Laravel\Nova\Fields\BooleanGroup
 {
     /**

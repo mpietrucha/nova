@@ -4,9 +4,10 @@ namespace Mpietrucha\Nova\Components\Contracts;
 
 use Illuminate\Http\Request;
 use Mpietrucha\Utility\Contracts\CompatibleInterface;
+use Mpietrucha\Utility\Contracts\TappableInterface;
 use Symfony\Component\HttpFoundation\Response;
 
-interface ResourceInterface extends CompatibleInterface
+interface ResourceInterface extends CompatibleInterface, TappableInterface
 {
     /**
      * @param  string|list<string>  $routes

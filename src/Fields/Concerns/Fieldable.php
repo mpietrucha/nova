@@ -2,7 +2,6 @@
 
 namespace Mpietrucha\Nova\Fields\Concerns;
 
-use Laravel\Nova\Makeable;
 use Mpietrucha\Utility\Concerns\Creatable;
 
 /**
@@ -10,5 +9,10 @@ use Mpietrucha\Utility\Concerns\Creatable;
  */
 trait Fieldable
 {
-    use Creatable, Makeable;
+    use Creatable;
+
+    public static function make(mixed ...$arguments): static
+    {
+        return static::create(...$arguments);
+    }
 }

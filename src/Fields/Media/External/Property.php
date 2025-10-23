@@ -1,9 +1,9 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields\External;
+namespace Mpietrucha\Nova\Fields\Media\External;
 
 use Laravel\Nova\Fields\Field;
-use Mpietrucha\Nova\Fields\External\Contracts\PropertyInterface;
+use Mpietrucha\Nova\Fields\Media\External\Contracts\PropertyInterface;
 use Mpietrucha\Utility\Concerns\Creatable;
 use Mpietrucha\Utility\Contracts\CreatableInterface;
 

@@ -1,13 +1,11 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields\External;
+namespace Mpietrucha\Nova\Fields\Media\External;
 
 use Mpietrucha\Nova\Fields\Concerns\InteractsWithRequest;
 use Mpietrucha\Nova\Fields\Contracts\InteractsWithRequestInterface;
-use Mpietrucha\Nova\Fields\External\Contracts\InteractsWithExternalInterface;
-use Mpietrucha\Nova\Fields\External\Contracts\PropertyInterface;
-use Mpietrucha\Nova\Fields\External\Property\Preview;
-use Mpietrucha\Nova\Fields\External\Property\Thumbnail;
+use Mpietrucha\Nova\Fields\Media\Contracts\InteractsWithExternalInterface;
+use Mpietrucha\Nova\Fields\Media\External\Contracts\PropertyInterface;
 use Mpietrucha\Nova\Fields\Text;
 use Mpietrucha\Utility\Concerns\Compatible;
 use Mpietrucha\Utility\Contracts\CompatibleInterface;

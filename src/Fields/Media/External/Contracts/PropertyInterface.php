@@ -1,6 +1,6 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields\External\Contracts;
+namespace Mpietrucha\Nova\Fields\Media\External\Contracts;
 
 use Laravel\Nova\Fields\Field;
 

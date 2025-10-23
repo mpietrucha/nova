@@ -1,9 +1,9 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields\External\Contracts;
+namespace Mpietrucha\Nova\Fields\Media\Contracts;
 
 use Mpietrucha\Nova\Fields\Contracts\InteractsWithRequestInterface;
-use Mpietrucha\Nova\Fields\External\File;
+use Mpietrucha\Nova\Fields\Media\External\File;
 
 /**
  * @phpstan-require-extends \Laravel\Nova\Fields\Audio|\Laravel\Nova\Fields\Avatar|\Laravel\Nova\Fields\File|\Laravel\Nova\Fields\Image
