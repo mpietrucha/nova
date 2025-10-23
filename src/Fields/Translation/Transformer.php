@@ -2,6 +2,7 @@
 
 namespace Mpietrucha\Nova\Fields\Translation;
 
+use Illuminate\Database\Eloquent\Model;
 use Mpietrucha\Nova\Fields\Translation\Exception\TranslatableModelException;
 use Mpietrucha\Utility\Collection;
 use Mpietrucha\Utility\Concerns\Compatible;
@@ -81,6 +82,10 @@ abstract class Transformer implements CompatibleInterface, CreatableInterface
      */
     protected static function compatibility(object $model): bool
     {
+        if (Instance::not($model, Model::class)) {
+            return false;
+        }
+
         return Instance::traits($model)->contains(HasTranslations::class);
     }
 }

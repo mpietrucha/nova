@@ -9,6 +9,6 @@ class TranslatableModelException extends InvalidArgumentException
 {
     public function initilize(): void
     {
-        $this->message('Translatable model must use %s trait', HasTranslations::class);
+        $this->message('Translatable must be an Eloquent model and use %s trait', HasTranslations::class);
     }
 }
