@@ -4,7 +4,6 @@ namespace Mpietrucha\Nova\Fields\Translation;
 
 use Mpietrucha\Nova\Fields\Translation\Concerns\InteractsWithField;
 use Mpietrucha\Nova\Fields\Translation\Contracts\InteractsWithFieldInterface;
-use Mpietrucha\Utility\Normalizer;
 
 class Text extends \Mpietrucha\Nova\Fields\Text implements InteractsWithFieldInterface
 {
@@ -17,6 +16,6 @@ class Text extends \Mpietrucha\Nova\Fields\Text implements InteractsWithFieldInt
 
     protected static function hydrate(): string
     {
-        return __('Translation') |> Normalizer::string(...);
+        return __('Translation');
     }
 }

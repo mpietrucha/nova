@@ -4,7 +4,6 @@ namespace Mpietrucha\Nova\Fields\Translation;
 
 use Mpietrucha\Nova\Fields\Translation\Concerns\InteractsWithField;
 use Mpietrucha\Nova\Fields\Translation\Contracts\InteractsWithFieldInterface;
-use Mpietrucha\Utility\Normalizer;
 
 class Select extends \Laravel\Nova\Fields\Select implements InteractsWithFieldInterface
 {
@@ -34,7 +33,7 @@ class Select extends \Laravel\Nova\Fields\Select implements InteractsWithFieldIn
 
     protected static function hydrate(): string
     {
-        return __('Language') |> Normalizer::string(...);
+        return __('Language');
     }
 
     protected function configure(): void

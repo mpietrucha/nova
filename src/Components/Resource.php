@@ -2,7 +2,6 @@
 
 namespace Mpietrucha\Nova\Components;
 
-use Illuminate\Http\Request;
 use Mpietrucha\Nova\Components\Contracts\ResourceInterface;
 use Mpietrucha\Utility\Arr;
 use Mpietrucha\Utility\Concerns\Compatible;
@@ -10,7 +9,8 @@ use Mpietrucha\Utility\Concerns\Creatable;
 use Mpietrucha\Utility\Concerns\Tappable;
 use Mpietrucha\Utility\Contracts\CreatableInterface;
 use Mpietrucha\Utility\Enumerable\Contracts\EnumerableInterface;
-use Mpietrucha\Utility\Normalizer;
+use Mpietrucha\Utility\Instance;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class Resource implements CreatableInterface, ResourceInterface
@@ -112,10 +112,10 @@ class Resource implements CreatableInterface, ResourceInterface
             return true;
         }
 
-        if (Arr::contains($routes, $request->route()->getName())) {
-            return true;
+        if (Instance::not($request, \Illuminate\Http\Request::class)) {
+            return false;
         }
 
-        return Arr::first($routes, $request->is(...)) |> Normalizer::boolean(...);
+        return $request->routeIs(...$routes) || $request->is(...$routes);
     }
 }

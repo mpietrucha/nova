@@ -3,7 +3,6 @@
 namespace Mpietrucha\Nova\Fields\Translation;
 
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Mpietrucha\Utility\Normalizer;
 use Mpietrucha\Utility\Utilizer\Concerns\Utilizable;
 use Mpietrucha\Utility\Utilizer\Contracts\UtilizableInterface;
 
@@ -29,6 +28,6 @@ class Repeatable extends \Laravel\Nova\Fields\Repeater\Repeatable implements Uti
 
     protected static function hydrate(): string
     {
-        return __('Translations') |> Normalizer::string(...);
+        return __('Translations');
     }
 }

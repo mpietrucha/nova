@@ -65,6 +65,8 @@ abstract class Transformer implements CompatibleInterface, CreatableInterface
 
         static::key() |> $model->offsetUnset(...);
 
+        $model->forgetTranslations($attribute);
+
         $model->setTranslations($attribute, $translations);
     }
 
