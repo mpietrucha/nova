@@ -22,12 +22,12 @@ class Repeatable extends \Laravel\Nova\Fields\Repeater\Repeatable implements Uti
     {
         return [
             Select::make(), /** @phpstan-ignore arguments.count */
-            Text::make()->required()->rules('required'), /** @phpstan-ignore arguments.count */
+            Text::make(), /** @phpstan-ignore arguments.count */
         ];
     }
 
     protected static function hydrate(): string
     {
-        return __('Translations');
+        return __('mpietrucha-nova::fields.translations');
     }
 }

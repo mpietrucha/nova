@@ -3,11 +3,11 @@
 namespace Mpietrucha\Nova\Fields;
 
 use Laravel\Nova\Fields\SupportsWithTrashedRelatables;
-use Mpietrucha\Nova\Fields\Concerns\InteractsWithRequest;
-use Mpietrucha\Nova\Fields\Contracts\InteractsWithRequestInterface;
 use Mpietrucha\Nova\Fields\Replicate\Concerns\Replicatable;
 use Mpietrucha\Nova\Fields\Replicate\Contracts\ReplicatableInterface;
 use Mpietrucha\Nova\Fields\Resource\Concerns\Guessable;
+use Mpietrucha\Nova\Utility\Concerns\InteractsWithRequest;
+use Mpietrucha\Nova\Utility\Contracts\InteractsWithRequestInterface;
 use Mpietrucha\Utility\Concerns\Compatible;
 use Mpietrucha\Utility\Contracts\CompatibleInterface;
 use Mpietrucha\Utility\Normalizer;

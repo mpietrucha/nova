@@ -1,13 +1,13 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields\Clone\Contracts;
+namespace Mpietrucha\Nova\Utility\Contracts;
 
 use Mpietrucha\Utility\Reflection;
 
 /**
  * @internal
  */
-interface InteractsWithReflectionInterface
+interface InteractsWithReflectionInterface extends InteractsWithThrowableInterface
 {
     /**
      * @return \Mpietrucha\Utility\Reflection<\Laravel\Nova\Fields\Field>

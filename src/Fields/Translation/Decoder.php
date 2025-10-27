@@ -2,12 +2,15 @@
 
 namespace Mpietrucha\Nova\Fields\Translation;
 
+use Mpietrucha\Utility\Normalizer;
+use Mpietrucha\Utility\Value;
+
 class Decoder extends Transformer
 {
     /**
-     * @return array{type: string, fields: array<string, string>}
+     * @return array{type: string, fields: array<string, null|string>}
      */
-    public function __invoke(string $translation, string $language): array
+    public function __invoke(string $translation, ?string $language = null): array
     {
         return [
             'type' => Repeatable::key(),
@@ -16,5 +19,18 @@ class Decoder extends Transformer
                 Text::property() => $translation,
             ],
         ];
+    }
+
+    /**
+     * @return array{type: string, fields: array<string, null|string>}
+     */
+    public static function empty(?string $translation = null, ?string $language = null): array
+    {
+        $evaluation = static::create() |> Value::for(...);
+
+        return $evaluation->eval([
+            Normalizer::string($translation),
+            $language,
+        ]);
     }
 }

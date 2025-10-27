@@ -13,10 +13,12 @@
     "require": {
         "php": "^8.5",
         "mpietrucha/utility": "^1.0",
+        "spatie/laravel-medialibrary": "^11.17",
         "spatie/laravel-translatable": "^6.11"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "dev-main",
+        "illuminate/support": "^12.12",
         "laravel/nova": "^5.0",
         "laravel/nova-devtool": "^1.7",
         "mpietrucha/pint": "^1.0",
@@ -42,6 +44,13 @@
         },
         "optimize-autoloader": true,
         "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mpietrucha\\Nova\\ServiceProvider"
+            ]
+        }
     },
     "scripts": {
         "post-update-cmd": [

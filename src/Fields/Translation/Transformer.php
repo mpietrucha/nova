@@ -40,6 +40,8 @@ abstract class Transformer implements CompatibleInterface, CreatableInterface
     {
         $translations = Decoder::create() |> Collection::create($translations)->map(...);
 
+        $translations->isEmpty() && Decoder::empty() |> $translations->push(...);
+
         return $translations->values()->all();
     }
 

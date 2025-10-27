@@ -1,6 +1,6 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields\Contracts;
+namespace Mpietrucha\Nova\Utility\Contracts;
 
 use Laravel\Nova\Http\Requests\NovaRequest;
 

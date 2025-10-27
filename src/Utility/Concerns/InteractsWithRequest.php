@@ -1,6 +1,6 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields\Concerns;
+namespace Mpietrucha\Nova\Utility\Concerns;
 
 use Laravel\Nova\Http\Requests\NovaRequest;
 

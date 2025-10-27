@@ -3,11 +3,12 @@
 namespace Mpietrucha\Nova\Fields;
 
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Mpietrucha\Nova\Fields\Concerns\InteractsWithRequest;
-use Mpietrucha\Nova\Fields\Contracts\InteractsWithRequestInterface;
 use Mpietrucha\Nova\Fields\Translation\Repeatable;
 use Mpietrucha\Nova\Fields\Translation\Select;
 use Mpietrucha\Nova\Fields\Translation\Transformer;
+use Mpietrucha\Nova\Fields\Translation\Validation;
+use Mpietrucha\Nova\Utility\Concerns\InteractsWithRequest;
+use Mpietrucha\Nova\Utility\Contracts\InteractsWithRequestInterface;
 use Mpietrucha\Utility\Arr;
 
 class Translation extends \Laravel\Nova\Fields\Repeater implements InteractsWithRequestInterface
@@ -29,11 +30,11 @@ class Translation extends \Laravel\Nova\Fields\Repeater implements InteractsWith
 
         $this->repeatable() |> Arr::overlap(...) |> $this->repeatables(...);
 
-        $this->required()->rules('required');
+        Validation::apply($this);
     }
 
     /**
-     * @phpstan-ignore-next-line argument.type
+     * @param  callable|iterable<string, string>|class-string<\BackedEnum>  $languages
      */
     public function languages(callable|iterable|string $languages): static
     {

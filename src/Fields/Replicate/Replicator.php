@@ -3,8 +3,9 @@
 namespace Mpietrucha\Nova\Fields\Replicate;
 
 use Closure;
-use Mpietrucha\Nova\Fields\Clone\Concerns\InteractsWithReflection;
-use Mpietrucha\Nova\Fields\Clone\Contracts\InteractsWithReflectionInterface;
+use Mpietrucha\Nova\Fields\Replicate\Contracts\ThrowableReplicateInterface;
+use Mpietrucha\Nova\Utility\Concerns\InteractsWithReflection;
+use Mpietrucha\Nova\Utility\Contracts\InteractsWithReflectionInterface;
 use Mpietrucha\Utility\Concerns\Creatable;
 use Mpietrucha\Utility\Contracts\CreatableInterface;
 use Mpietrucha\Utility\Value;
@@ -12,6 +13,11 @@ use Mpietrucha\Utility\Value;
 class Replicator implements CreatableInterface, InteractsWithReflectionInterface
 {
     use Creatable, InteractsWithReflection;
+
+    public function throwable(): bool
+    {
+        return $this->field() instanceof ThrowableReplicateInterface;
+    }
 
     public function supported(string $method): bool
     {
@@ -24,9 +30,11 @@ class Replicator implements CreatableInterface, InteractsWithReflectionInterface
             return;
         }
 
-        $evaluation = $this->closure($method) |> Value::for(...);
+        $closure = $this->closure($method);
 
-        $evaluation->get($value);
+        $attempt = Value::attempt($closure)->get($value);
+
+        $attempt->failed() && $this->throwable() && $attempt->throwable()->throw();
     }
 
     protected function closure(string $method): Closure

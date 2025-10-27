@@ -7,7 +7,7 @@ use Mpietrucha\Nova\Fields\Enum\Options;
 class BooleanGroup extends \Laravel\Nova\Fields\BooleanGroup
 {
     /**
-     * @param  callable():(iterable<string, string>)|iterable<string, string>|string  $options
+     * @param  callable|iterable<string, string>|string  $options
      */
     public function options(callable|iterable|string $options): static
     {

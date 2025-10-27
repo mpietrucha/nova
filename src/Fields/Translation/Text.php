@@ -16,6 +16,6 @@ class Text extends \Mpietrucha\Nova\Fields\Text implements InteractsWithFieldInt
 
     protected static function hydrate(): string
     {
-        return __('Translation');
+        return __('mpietrucha-nova::fields.translation');
     }
 }

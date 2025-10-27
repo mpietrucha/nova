@@ -2,25 +2,22 @@
 
 namespace Mpietrucha\Nova\Fields\Media\Concerns;
 
-use Mpietrucha\Nova\Fields\Concerns\InteractsWithRequest;
-use Mpietrucha\Nova\Fields\Media\External\File;
+use Mpietrucha\Nova\Fields\Media\External;
 
 /**
  * phpstan-require-implements \Mpietrucha\Nova\Fields\File\Contracts\InteractsWithExternalInterface
  */
 trait InteractsWithExternal
 {
-    use InteractsWithRequest;
-
-    public function external(): File|static
+    public function external(): External|static
     {
-        File::preview($this) |> $this->preview(...);
-        File::thumbnail($this) |> $this->thumbnail(...);
+        External::preview(...) |> $this->preview(...);
+        External::thumbnail(...) |> $this->thumbnail(...);
 
-        if (File::incompatible()) {
+        if (External::incompatible()) {
             return $this;
         }
 
-        return File::replicate($this);
+        return External::replicate($this);
     }
 }

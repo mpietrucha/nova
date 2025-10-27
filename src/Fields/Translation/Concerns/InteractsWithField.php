@@ -2,6 +2,8 @@
 
 namespace Mpietrucha\Nova\Fields\Translation\Concerns;
 
+use Mpietrucha\Nova\Fields\Translation\Validation;
+use Mpietrucha\Utility\Instance\Method;
 use Mpietrucha\Utility\Utilizer\Concerns\Utilizable;
 
 /**
@@ -15,15 +17,13 @@ trait InteractsWithField
     {
         parent::__construct(static::name(), static::property());
 
-        $this->configure();
+        Validation::apply($this);
+
+        Method::exists($this, 'configure') && $this->configure();
     }
 
     public static function name(): string
     {
         return static::utilize();
-    }
-
-    protected function configure(): void
-    {
     }
 }
