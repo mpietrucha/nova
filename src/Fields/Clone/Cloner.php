@@ -2,8 +2,8 @@
 
 namespace Mpietrucha\Nova\Fields\Clone;
 
-use Mpietrucha\Nova\Utility\Concerns\InteractsWithReflection;
-use Mpietrucha\Nova\Utility\Contracts\InteractsWithReflectionInterface;
+use Mpietrucha\Nova\Concerns\InteractsWithReflection;
+use Mpietrucha\Nova\Contracts\InteractsWithReflectionInterface;
 use Mpietrucha\Utility\Concerns\Creatable;
 use Mpietrucha\Utility\Contracts\CreatableInterface;
 

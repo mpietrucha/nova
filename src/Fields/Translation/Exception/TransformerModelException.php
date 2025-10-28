@@ -5,10 +5,10 @@ namespace Mpietrucha\Nova\Fields\Translation\Exception;
 use Mpietrucha\Utility\Throwable\InvalidArgumentException;
 use Spatie\Translatable\HasTranslations;
 
-class TranslatableModelException extends InvalidArgumentException
+class TransformerModelException extends InvalidArgumentException
 {
     public function initilize(): void
     {
-        $this->message('Translatable must be an Eloquent model and use %s trait', HasTranslations::class);
+        $this->message('Transformer model must be an Eloquent model and use %s trait', HasTranslations::class);
     }
 }

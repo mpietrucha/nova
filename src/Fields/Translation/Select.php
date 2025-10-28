@@ -3,11 +3,11 @@
 namespace Mpietrucha\Nova\Fields\Translation;
 
 use Illuminate\Validation\Rule;
+use Mpietrucha\Nova\Concerns\InteractsWithRequest;
+use Mpietrucha\Nova\Contracts\InteractsWithRequestInterface;
 use Mpietrucha\Nova\Fields\Translation\Concerns\InteractsWithField;
 use Mpietrucha\Nova\Fields\Translation\Contracts\InteractsWithFieldInterface;
 use Mpietrucha\Nova\Fields\Translation\Validation\Language;
-use Mpietrucha\Nova\Utility\Concerns\InteractsWithRequest;
-use Mpietrucha\Nova\Utility\Contracts\InteractsWithRequestInterface;
 use Mpietrucha\Utility\Arr;
 
 class Select extends \Laravel\Nova\Fields\Select implements InteractsWithFieldInterface, InteractsWithRequestInterface

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mpietrucha\Nova\Utility\Contracts;
+namespace Mpietrucha\Nova\Contracts;
 
 use Mpietrucha\Utility\Reflection;
 

@@ -2,10 +2,10 @@
 
 namespace Mpietrucha\Nova\Fields\Media;
 
+use Mpietrucha\Nova\Concerns\InteractsWithRequest;
+use Mpietrucha\Nova\Contracts\InteractsWithRequestInterface;
 use Mpietrucha\Nova\Fields\Delegate\Concerns\Delegable;
 use Mpietrucha\Nova\Fields\Text;
-use Mpietrucha\Nova\Utility\Concerns\InteractsWithRequest;
-use Mpietrucha\Nova\Utility\Contracts\InteractsWithRequestInterface;
 use Mpietrucha\Utility\Concerns\Compatible;
 use Mpietrucha\Utility\Contracts\CompatibleInterface;
 use Mpietrucha\Utility\Normalizer;

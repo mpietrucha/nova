@@ -1,11 +1,11 @@
 <?php
 
-namespace Mpietrucha\Nova\Utility\Concerns;
+namespace Mpietrucha\Nova\Concerns;
 
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 /**
- * phpstan-require-implements \Mpietrucha\Nova\Fields\Contracts\InteractsWithRequestInterface
+ * phpstan-require-implements \Mpietrucha\Nova\Contracts\InteractsWithRequestInterface
  */
 trait InteractsWithRequest
 {

@@ -2,94 +2,49 @@
 
 namespace Mpietrucha\Nova\Fields\Translation;
 
-use Illuminate\Database\Eloquent\Model;
-use Mpietrucha\Nova\Fields\Translation\Exception\TranslatableModelException;
-use Mpietrucha\Utility\Collection;
-use Mpietrucha\Utility\Concerns\Compatible;
-use Mpietrucha\Utility\Concerns\Creatable;
-use Mpietrucha\Utility\Contracts\CompatibleInterface;
-use Mpietrucha\Utility\Contracts\CreatableInterface;
+use Mpietrucha\Nova\Fields\Translation\Exception\TransformerModelException;
+use Mpietrucha\Utility\Arr;
 use Mpietrucha\Utility\Instance;
-use Spatie\Translatable\HasTranslations;
 
-abstract class Transformer implements CompatibleInterface, CreatableInterface
+class Transformer extends \Mpietrucha\Nova\Fields\Repeatable\Transformer
 {
-    use Compatible, Creatable;
-
-    public static function key(): string
+    public function encoder(): callable
     {
-        return 'nova_temporary_translations';
+        return Encoder::create();
     }
 
-    /**
-     * @param  array<int, array{type: string, fields: array<string, string>}>  $translations
-     * @return array<string, string>
-     */
-    public static function encode(array $translations): array
+    public function decoder(): callable
     {
-        $translations = Encoder::create() |> Collection::create($translations)->map(...);
-
-        return $translations->collapse()->all();
+        return Decoder::create();
     }
 
-    /**
-     * @param  array<string, string>  $translations
-     * @return array<int, array{type: string, fields: array<string, string>}>
-     */
-    public static function decode(array $translations): array
+    public function decode(array $output): array
     {
-        $translations = Decoder::create() |> Collection::create($translations)->map(...);
+        $input = parent::decode($output);
 
-        $translations->isEmpty() && Decoder::empty() |> $translations->push(...);
-
-        return $translations->values()->all();
+        return $input ?: Decoder::empty() |> Arr::wrap(...);
     }
 
-    public static function hydrate(mixed $model, string $attribute): string
+    public function get(Model $model, string $atttribute): array
     {
-        static::using($model);
-
-        $translations = $model->getTranslations($attribute) |> static::decode(...);
-
-        $model->offsetSet($key = static::key(), $translations);
-
-        return $key;
+        return $model->getTranslations($attribute);
     }
 
-    /**
-     * @param  array<int, array{type: string, fields: array<string, string>}>  $translations
-     */
-    public static function set(mixed $model, string $attribute, array $translations): void
+    public function set(Model $model, string $attribute, array $output): void
     {
-        static::using($model);
-
-        $translations = static::encode($translations);
-
-        static::key() |> $model->offsetUnset(...);
-
         $model->forgetTranslations($attribute);
 
-        $model->setTranslations($attribute, $translations);
+        $model->setTranslations($attribute, $output);
     }
 
     protected static function using(mixed $model): void
     {
-        if (static::compatible($model)) {
+        parent::using($model);
+
+        if (Instance::traits($model)->contains(HasTranslations::class)) {
             return;
         }
 
-        TranslatableModelException::create()->throw();
-    }
-
-    /**
-     * @phpstan-assert-if-true \Illuminate\Database\Eloquent\Model $model
-     */
-    protected static function compatibility(object $model): bool
-    {
-        if (Instance::not($model, Model::class)) {
-            return false;
-        }
-
-        return Instance::traits($model)->contains(HasTranslations::class);
+        TransformerModelException::create()->throw();
     }
 }

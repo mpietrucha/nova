@@ -1,13 +1,13 @@
 <?php
 
-namespace Mpietrucha\Nova\Utility\Concerns;
+namespace Mpietrucha\Nova\Concerns;
 
 use Laravel\Nova\Fields\Field;
 use Mpietrucha\Utility\Normalizer;
 use Mpietrucha\Utility\Reflection;
 
 /**
- * phpstan-require-implements \Mpietrucha\Nova\Utility\Contracts\InteractsWithReflectionInterface
+ * phpstan-require-implements \Mpietrucha\Nova\Contracts\InteractsWithReflectionInterface
  */
 trait InteractsWithReflection
 {

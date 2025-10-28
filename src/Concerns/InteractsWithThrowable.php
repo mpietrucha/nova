@@ -1,11 +1,11 @@
 <?php
 
-namespace Mpietrucha\Nova\Utility\Concerns;
+namespace Mpietrucha\Nova\Concerns;
 
 use Mpietrucha\Utility\Normalizer;
 
 /**
- * @phpstan-require-implements \Mpietrucha\Nova\Utility\Contracts\InteractsWithThrowableInterface
+ * @phpstan-require-implements \Mpietrucha\Nova\Contracts\InteractsWithThrowableInterface
  */
 trait InteractsWithThrowable
 {

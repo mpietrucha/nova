@@ -2,9 +2,9 @@
 
 namespace Mpietrucha\Nova\Fields\Delegate;
 
+use Mpietrucha\Nova\Concerns\InteractsWithReflection;
+use Mpietrucha\Nova\Contracts\InteractsWithReflectionInterface;
 use Mpietrucha\Nova\Fields\Delegate\Contracts\ThrowableDelegateInterface;
-use Mpietrucha\Nova\Utility\Concerns\InteractsWithReflection;
-use Mpietrucha\Nova\Utility\Contracts\InteractsWithReflectionInterface;
 use Mpietrucha\Utility\Concerns\Creatable;
 use Mpietrucha\Utility\Contracts\CreatableInterface;
 use Mpietrucha\Utility\Forward\Concerns\Forwardable;
