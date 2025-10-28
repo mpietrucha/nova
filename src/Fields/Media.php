@@ -3,27 +3,34 @@
 namespace Mpietrucha\Nova\Fields;
 
 use Mpietrucha\Nova\Fields\Media\Collection;
+use Mpietrucha\Nova\Fields\Media\Contracts\InteractsWithMediaInterface;
 
 abstract class Media
 {
-    public static function audio(string $name): Audio
+    public static function audio(?string $name = null): InteractsWithMediaInterface
     {
-        return Audio::make($name);
+        $name ??= __('mpietrucha-nova::media.fields.audio');
+
+        return Audio::make($name) |> static::configure(...);
     }
 
-    public static function avatar(?string $name = null): Avatar
+    public static function avatar(?string $name = null): InteractsWithMediaInterface
     {
-        return Avatar::make($name);
+        return Avatar::make($name) |> static::configure(...);
     }
 
-    public static function image(string $name): Image
+    public static function image(?string $name = null): InteractsWithMediaInterface
     {
-        return Image::make($name);
+        $name ??= __('mpietrucha-nova::media.fields.image');
+
+        return Image::make($name) |> static::configure(...);
     }
 
-    public static function file(string $name): File
+    public static function file(?string $name = null): InteractsWithMediaInterface
     {
-        return File::make($name);
+        $name ??= __('mpietrucha-nova::media.fields.file');
+
+        return File::make($name) |> static::configure(...);
     }
 
     /**
@@ -31,6 +38,21 @@ abstract class Media
      */
     public static function collection(string $name, array $fields): Collection
     {
-        return Collection::make($name, $fields);
+        return Collection::make($name, $fields); /** @phpstan-ignore argument.type */
+    }
+
+    protected static function configure(InteractsWithMediaInterface $media): InteractsWithMediaInterface
+    {
+        // $field->store(...);
+
+        // $field->thumbnail(...);
+
+        // $field->preview(...);
+
+        // $field->download(...);
+
+        // $field->delete(...);
+
+        return $media;
     }
 }

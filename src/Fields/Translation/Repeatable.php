@@ -28,6 +28,6 @@ class Repeatable extends \Laravel\Nova\Fields\Repeater\Repeatable implements Uti
 
     protected static function hydrate(): string
     {
-        return __('mpietrucha-nova::fields.translations');
+        return __('mpietrucha-nova::translation.repeatable');
     }
 }

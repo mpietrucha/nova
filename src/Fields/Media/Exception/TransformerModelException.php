@@ -1,14 +1,14 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields\Translation\Exception;
+namespace Mpietrucha\Nova\Fields\Media\Exception;
 
 use Mpietrucha\Utility\Throwable\InvalidArgumentException;
-use Spatie\Translatable\HasTranslations;
+use Spatie\MediaLibrary\HasMedia;
 
 class TransformerModelException extends InvalidArgumentException
 {
     public function initilize(): void
     {
-        $this->message('Transformer model must use %s trait', HasTranslations::class);
+        $this->message('Transformer model must implement %s interface', HasMedia::class);
     }
 }

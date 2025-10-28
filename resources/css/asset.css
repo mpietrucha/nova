@@ -1,0 +1,25 @@
+div:has(> [dusk$="-repeater-row"]:nth-of-type(1):last-of-type)
+    > [dusk$="-repeater-row"][data-indicator="mpietrucha-nova-fields-translation"]
+    > div:first-of-type {
+    display: none;
+}
+
+div:has(> [dusk$="-repeater-row"]) + div {
+    margin-top: 1rem !important;
+}
+
+div[dusk$="-repeater-row"][data-indicator="mpietrucha-nova-fields-media-collection"]
+    > div:last-of-type
+    > div
+    > div:first-of-type
+    > div:first-of-type {
+    display: none;
+}
+
+div[dusk$="-repeater-row"][data-indicator="mpietrucha-nova-fields-media-collection"]
+    > div:last-of-type
+    > div
+    > div:first-of-type
+    > div:last-of-type {
+    width: 100%;
+}

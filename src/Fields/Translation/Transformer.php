@@ -2,9 +2,11 @@
 
 namespace Mpietrucha\Nova\Fields\Translation;
 
+use Illuminate\Database\Eloquent\Model;
 use Mpietrucha\Nova\Fields\Translation\Exception\TransformerModelException;
 use Mpietrucha\Utility\Arr;
 use Mpietrucha\Utility\Instance;
+use Spatie\Translatable\HasTranslations;
 
 class Transformer extends \Mpietrucha\Nova\Fields\Repeatable\Transformer
 {
@@ -20,20 +22,19 @@ class Transformer extends \Mpietrucha\Nova\Fields\Repeatable\Transformer
 
     public function decode(array $output): array
     {
-        $input = parent::decode($output);
-
-        return $input ?: Decoder::empty() |> Arr::wrap(...);
+        return parent::decode($output) ?: Decoder::empty() |> Arr::overlap(...);
     }
 
-    public function get(Model $model, string $atttribute): array
+    protected function get(Model $model, string $attribute): array
     {
-        return $model->getTranslations($attribute);
+        return $model->getTranslations($attribute); /** @phpstan-ignore method.notFound */
     }
 
-    public function set(Model $model, string $attribute, array $output): void
+    protected function set(Model $model, string $attribute, array $output): void
     {
-        $model->forgetTranslations($attribute);
+        $model->forgetTranslations($attribute); /** @phpstan-ignore method.notFound */
 
+        /** @phpstan-ignore-next-line method.notFound */
         $model->setTranslations($attribute, $output);
     }
 

@@ -43,7 +43,7 @@ class Select extends \Laravel\Nova\Fields\Select implements InteractsWithFieldIn
 
     protected static function hydrate(): string
     {
-        return __('mpietrucha-nova::fields.language');
+        return __('mpietrucha-nova::translation.fields.language');
     }
 
     protected function configure(): void

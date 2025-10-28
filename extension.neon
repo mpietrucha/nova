@@ -1,0 +1,6 @@
+parameters:
+    typeAliases:
+        RepeatableTransformerInputFrame: "array{type: string, fields: array<string, null|string>}"
+        RepeatableTransformerOutputFrame: "array<string, string>"
+        RepeatableTransformerOutput: "RepeatableTransformerOutputFrame"
+        RepeatableTransformerInput: "list<RepeatableTransformerInputFrame>"

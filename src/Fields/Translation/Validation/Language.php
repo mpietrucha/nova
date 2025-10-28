@@ -48,7 +48,7 @@ class Language implements CreatableInterface, DataAwareRule, ValidationRule
             return;
         }
 
-        __('mpietrucha-nova::validation.language') |> $fail(...);
+        __('mpietrucha-nova::translation.validation.language') |> $fail(...);
     }
 
     /**

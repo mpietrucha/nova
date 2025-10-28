@@ -10,15 +10,22 @@ interface TransformerInterface extends CompatibleInterface
 
     public function encoder(): callable;
 
+    /**
+     * @param  RepeatableTransformerInput  $input
+     * @return RepeatableTransformerOutput
+     */
     public function encode(array $input): array;
 
+    /**
+     * @param  RepeatableTransformerOutput  $output
+     * @return RepeatableTransformerInput
+     */
     public function decode(array $output): array;
 
     public function hydrate(mixed $model, string $attribute): string;
 
-    public function fill(mixed $model, string $attribute, array $output): void;
-
-    public function get(Model $model, string $attribute): array;
-
-    public function set(Model $model, string $attribute, array $output): void;
+    /**
+     * @param  RepeatableTransformerInput  $input
+     */
+    public function fill(mixed $model, string $attribute, array $input): void;
 }

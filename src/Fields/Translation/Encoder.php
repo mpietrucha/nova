@@ -2,20 +2,18 @@
 
 namespace Mpietrucha\Nova\Fields\Translation;
 
-use Mpietrucha\Utility\Arr;
-
-class Encoder extends Transformer
+class Encoder extends \Mpietrucha\Nova\Fields\Repeatable\Encoder
 {
     /**
-     * @param  array{type: string, fields: array<string, string>}  $translation
-     * @return array<string, string>
+     * @param  RepeatableTransformerInputFrame  $translation
+     * @return RepeatableTransformerOutputFrame
      */
     public function __invoke(array $translation): array
     {
-        $fields = Arr::get($translation, 'fields');
+        $fields = static::fields($translation);
 
         return [
-            Arr::get($fields, Select::property()) => Arr::get($fields, Text::property()),
+            Select::property() |> $fields->get(...) => Text::property() |> $fields->get(...),
         ];
     }
 }

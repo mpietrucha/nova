@@ -2,7 +2,10 @@
 
 namespace Mpietrucha\Nova\Fields\Media;
 
-use Laravel\Nova\Fields\Repeater;
+use Mpietrucha\Nova\Fields\Media\Contracts\InteractsWithMediaInterface;
+use Mpietrucha\Nova\Fields\Media\Exception\CollectionFieldException;
+use Mpietrucha\Nova\Fields\Media\Exception\CollectionFieldsException;
+use Mpietrucha\Nova\Fields\Repeatable\Repeater;
 use Mpietrucha\Utility\Arr;
 
 class Collection extends Repeater
@@ -12,10 +15,22 @@ class Collection extends Repeater
      */
     public function __construct(string $name, array $fields)
     {
-        parent::__construct($name);
+        parent::__construct(Transformer::create(), $name);
 
-        Repeatable::use($fields[0]);
+        $this->field($fields) |> Repeatable::use(...);
 
-        Repeatable::make() |> Arr::overlap(...) |> $this->repeatables(...);
+        Repeatable::make() |> $this->repeatables(...);
+    }
+
+    /**
+     * @param  list<\Mpietrucha\Nova\Fields\Media\Contracts\InteractsWithMediaInterface>  $fields
+     */
+    protected function field(array $fields): InteractsWithMediaInterface
+    {
+        Arr::count($fields) > 1 && CollectionFieldsException::create()->throw();
+
+        $field = Arr::first($fields);
+
+        return $field instanceof InteractsWithMediaInterface ? $field : CollectionFieldException::create()->throw();
     }
 }

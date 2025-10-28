@@ -4,12 +4,13 @@ namespace Mpietrucha\Nova\Fields;
 
 use Mpietrucha\Nova\Concerns\InteractsWithRequest;
 use Mpietrucha\Nova\Contracts\InteractsWithRequestInterface;
+use Mpietrucha\Nova\Fields\Repeatable\Repeater;
 use Mpietrucha\Nova\Fields\Translation\Repeatable;
 use Mpietrucha\Nova\Fields\Translation\Select;
 use Mpietrucha\Nova\Fields\Translation\Transformer;
 use Mpietrucha\Nova\Fields\Translation\Validation;
 
-class Translation extends \Mpietrucha\Nova\Fields\Repeatable\Repeater implements InteractsWithRequestInterface
+class Translation extends Repeater implements InteractsWithRequestInterface
 {
     use InteractsWithRequest;
 

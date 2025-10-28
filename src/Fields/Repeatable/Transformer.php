@@ -37,13 +37,16 @@ abstract class Transformer implements CreatableInterface, TransformerInterface
     {
         static::using($model);
 
-        $input = $this->get($model, $attribute) |> static::decode(...);
+        $input = $this->get($model, $attribute) |> $this->decode(...);
 
         $model->offsetSet($key = static::key(), $input);
 
         return $key;
     }
 
+    /**
+     * @param  RepeatableTransformerInput  $input
+     */
     public function fill(mixed $model, string $attribute, array $input): void
     {
         static::using($model);
@@ -51,7 +54,19 @@ abstract class Transformer implements CreatableInterface, TransformerInterface
         $output = $this->encode($input);
 
         $this->set($model, $attribute, $output);
+
+        static::key() |> $model->offsetUnset(...);
     }
+
+    /**
+     * @return RepeatableTransformerOutput
+     */
+    abstract protected function get(Model $model, string $attribute): array;
+
+    /**
+     * @param  RepeatableTransformerOutput  $output
+     */
+    abstract protected function set(Model $model, string $attribute, array $output): void;
 
     protected static function using(mixed $model): void
     {
@@ -62,7 +77,7 @@ abstract class Transformer implements CreatableInterface, TransformerInterface
         TransformerModelException::create()->throw();
     }
 
-    protected static function compatibility(mixed $model): bool
+    final protected static function compatibility(mixed $model): bool
     {
         return $model instanceof Model;
     }

@@ -1,4 +1,5 @@
 includes:
+    - extension.neon
     - vendor/mpietrucha/utility/extension.neon
     - vendor/larastan/larastan/extension.neon
 parameters:
