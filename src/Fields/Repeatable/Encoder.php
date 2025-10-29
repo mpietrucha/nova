@@ -2,6 +2,7 @@
 
 namespace Mpietrucha\Nova\Fields\Repeatable;
 
+use Mpietrucha\Nova\Fields\Repeatable\Enums\Frame;
 use Mpietrucha\Utility\Arr;
 use Mpietrucha\Utility\Collection;
 use Mpietrucha\Utility\Concerns\Creatable;
@@ -14,10 +15,12 @@ abstract class Encoder implements CreatableInterface
 
     /**
      * @param  RepeatableTransformerInputFrame  $frame
-     * @return \Mpietrucha\Utility\Enumerable\Contracts\EnumerableInterface<string, string>
+     * @return RepeatableTransformerInputFrameFieldsCollection
      */
     protected static function fields(array $frame): EnumerableInterface
     {
-        return Arr::get($frame, 'fields') |> Collection::create(...);
+        $fields = Frame::FIELDS->value;
+
+        return Arr::get($frame, $fields) |> Collection::create(...);
     }
 }

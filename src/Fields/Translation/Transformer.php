@@ -3,8 +3,7 @@
 namespace Mpietrucha\Nova\Fields\Translation;
 
 use Illuminate\Database\Eloquent\Model;
-use Mpietrucha\Nova\Fields\Translation\Exception\TransformerModelException;
-use Mpietrucha\Utility\Arr;
+use Mpietrucha\Nova\Fields\Translation\Exception\ResourceModelException;
 use Mpietrucha\Utility\Instance;
 use Spatie\Translatable\HasTranslations;
 
@@ -22,7 +21,7 @@ class Transformer extends \Mpietrucha\Nova\Fields\Repeatable\Transformer
 
     public function decode(array $output): array
     {
-        return parent::decode($output) ?: Decoder::empty() |> Arr::overlap(...);
+        return parent::decode($output) ?: Decoder::default();
     }
 
     protected function get(Model $model, string $attribute): array
@@ -46,6 +45,6 @@ class Transformer extends \Mpietrucha\Nova\Fields\Repeatable\Transformer
             return;
         }
 
-        TransformerModelException::create()->throw();
+        ResourceModelException::create()->throw();
     }
 }

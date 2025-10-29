@@ -3,7 +3,7 @@
 namespace Mpietrucha\Nova\Fields\Media;
 
 use Illuminate\Database\Eloquent\Model;
-use Mpietrucha\Nova\Fields\Media\Exception\TransformerModelException;
+use Mpietrucha\Nova\Fields\Media\Exception\ResourceModelException;
 use Spatie\MediaLibrary\HasMedia;
 
 class Transformer extends \Mpietrucha\Nova\Fields\Repeatable\Transformer
@@ -20,12 +20,16 @@ class Transformer extends \Mpietrucha\Nova\Fields\Repeatable\Transformer
 
     protected function get(Model $model, string $attribute): array
     {
-        return $model->getMedia($attribute)->all();
+        /** @phpstan-ignore-next-line method.notFound */
+        $media = $model->getMedia($attribute);
+
+        return $media->map->getPathRelativeToRoot()->all();
     }
 
     protected function set(Model $model, string $attribute, array $output): void
     {
-        dd($attribute, $output);
+        /** @var \Illuminate\Database\Eloquent\Model&\Spatie\MediaLibrary\HasMedia $model */
+        Synchronizer::synchronize($model, $attribute, $output);
     }
 
     protected static function using(mixed $model): void
@@ -36,6 +40,6 @@ class Transformer extends \Mpietrucha\Nova\Fields\Repeatable\Transformer
             return;
         }
 
-        TransformerModelException::create()->throw();
+        ResourceModelException::create()->throw();
     }
 }

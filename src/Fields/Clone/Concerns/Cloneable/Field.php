@@ -15,7 +15,6 @@ trait Field
      * @var array<int, string>
      */
     protected static array $cloneable = [
-        'attribute',
         'resolveCallback',
     ];
 }

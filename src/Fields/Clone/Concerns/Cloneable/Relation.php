@@ -15,7 +15,6 @@ trait Relation
      * @var array<int, string>
      */
     protected static array $cloneable = [
-        'attribute',
         'resourceClass',
     ];
 }

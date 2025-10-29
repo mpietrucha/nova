@@ -8,6 +8,7 @@ use Mpietrucha\Nova\Concerns\InteractsWithIndicator;
 use Mpietrucha\Nova\Contracts\InteractsWithIndicatorInterface;
 use Mpietrucha\Nova\Fields\Repeatable\Contracts\TransformerInterface;
 use Mpietrucha\Utility\Arr;
+use Mpietrucha\Utility\Normalizer;
 
 class Repeater extends \Laravel\Nova\Fields\Repeater implements InteractsWithIndicatorInterface
 {
@@ -37,7 +38,7 @@ class Repeater extends \Laravel\Nova\Fields\Repeater implements InteractsWithInd
 
     protected function fillAttribute(NovaRequest $request, string $requestAttribute, object $model, string $attribute): void
     {
-        $input = $request->all($requestAttribute) |> Arr::first(...);
+        $input = $request->all($requestAttribute) |> Arr::first(...) |> Normalizer::array(...);
 
         $this->transformer()->fill($model, $attribute, $input);
     }

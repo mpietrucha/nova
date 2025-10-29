@@ -2,18 +2,18 @@
 
 namespace Mpietrucha\Nova\Fields\Media;
 
+use Mpietrucha\Nova\Fields\Media\Synchronizer\Input;
+
 class Encoder extends \Mpietrucha\Nova\Fields\Repeatable\Encoder
 {
     /**
      * @param  RepeatableTransformerInputFrame  $media
      * @return RepeatableTransformerOutputFrame
      */
-    public function __invoke(array $media): array
+    public function __invoke(array $media, int $index): array
     {
-        $fields = static::fields($media);
+        $input = static::fields($media) |> Input::build(...);
 
-        return [
-            $fields->keys()->first() => $fields->values()->first(),
-        ];
+        return [$index => $input];
     }
 }

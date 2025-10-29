@@ -11,9 +11,4 @@ use Mpietrucha\Nova\Fields\Replicate\Concerns\Replicatable;
 trait Field
 {
     use Cloneable\Field, Replicatable;
-
-    /**
-     * @var array<string, string>
-     */
-    protected static array $replicatable = [];
 }

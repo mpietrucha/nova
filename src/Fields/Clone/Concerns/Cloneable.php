@@ -3,6 +3,7 @@
 namespace Mpietrucha\Nova\Fields\Clone\Concerns;
 
 use Laravel\Nova\Fields\Field;
+use Mpietrucha\Nova\Fields\Clone\Defaults;
 use Mpietrucha\Nova\Fields\Clone\Properties;
 use Mpietrucha\Utility\Arr;
 use Mpietrucha\Utility\Instance\Property;
@@ -15,8 +16,7 @@ trait Cloneable
 {
     public static function clone(Field $source): static
     {
-        /** @var list<string> $properties */
-        $properties = Arr::prepend(static::cloneable(), 'name');
+        $properties = static::cloneable();
 
         return static::make(...) |> Properties::get($source, $properties)->values()->pipeSpread(...);
     }
@@ -36,6 +36,6 @@ trait Cloneable
             default => []
         } |> Normalizer::array(...);
 
-        return [$cloneable, $clone] |> Arr::flatten(...);
+        return [Defaults::get(), $cloneable, $clone] |> Arr::flatten(...);
     }
 }

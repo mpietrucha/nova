@@ -7,8 +7,21 @@ class Decoder extends \Mpietrucha\Nova\Fields\Repeatable\Decoder
     /**
      * @return RepeatableTransformerInputFrame
      */
-    public function __invoke(string $name, string $url): array
+    public function __invoke(string $path, int $index): array
     {
-        return [];
+        $fields = $this->fields($path, $index);
+
+        return static::build(Repeatable::key(), $fields);
+    }
+
+    /**
+     * @return RepeatableTransformerInputFrameFields
+     */
+    protected function fields(string $path, int $index): array
+    {
+        return [
+            Index::property() => $index,
+            Repeatable::property() => $path,
+        ];
     }
 }

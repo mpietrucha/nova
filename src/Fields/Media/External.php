@@ -17,14 +17,6 @@ class External extends Text implements CompatibleInterface, InteractsWithRequest
 {
     use Compatible, Delegable, InteractsWithRequest;
 
-    /**
-     * @var array<string, string>
-     */
-    protected static array $replicate = [
-        'rules' => 'rules',
-        'requiredCallback' => 'required',
-    ];
-
     public static function preview(string $url): string
     {
         return $url;

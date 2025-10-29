@@ -4,7 +4,7 @@ namespace Mpietrucha\Nova\Fields\Repeatable;
 
 use Illuminate\Database\Eloquent\Model;
 use Mpietrucha\Nova\Fields\Repeatable\Contracts\TransformerInterface;
-use Mpietrucha\Nova\Fields\Repeatable\Exception\TransformerModelException;
+use Mpietrucha\Nova\Fields\Repeatable\Exception\ResourceModelException;
 use Mpietrucha\Utility\Collection;
 use Mpietrucha\Utility\Concerns\Compatible;
 use Mpietrucha\Utility\Concerns\Creatable;
@@ -23,7 +23,7 @@ abstract class Transformer implements CreatableInterface, TransformerInterface
     {
         $output = $this->encoder() |> Collection::create($input)->map(...);
 
-        return $output->collapse()->all();
+        return $output->collapseWithKeys()->all();
     }
 
     public function decode(array $output): array
@@ -74,7 +74,7 @@ abstract class Transformer implements CreatableInterface, TransformerInterface
             return;
         }
 
-        TransformerModelException::create()->throw();
+        ResourceModelException::create()->throw();
     }
 
     final protected static function compatibility(mixed $model): bool

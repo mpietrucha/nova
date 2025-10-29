@@ -5,6 +5,7 @@ namespace Mpietrucha\Nova\Fields\Replicate\Concerns;
 use Laravel\Nova\Fields\Field;
 use Mpietrucha\Nova\Fields\Clone\Concerns\Cloneable;
 use Mpietrucha\Nova\Fields\Clone\Properties;
+use Mpietrucha\Nova\Fields\Replicate\Defaults;
 use Mpietrucha\Nova\Fields\Replicate\Methods;
 use Mpietrucha\Utility\Arr;
 use Mpietrucha\Utility\Instance\Property;
@@ -43,6 +44,6 @@ trait Replicatable
             default => []
         } |> Normalizer::array(...);
 
-        return [$replicatable, $replicate] |> Arr::collapse(...);
+        return [Defaults::get(), $replicatable, $replicate] |> Arr::collapse(...);
     }
 }
