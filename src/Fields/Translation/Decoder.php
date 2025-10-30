@@ -6,7 +6,7 @@ use Mpietrucha\Utility\Arr;
 use Mpietrucha\Utility\Normalizer;
 use Mpietrucha\Utility\Value;
 
-class Decoder extends \Mpietrucha\Nova\Fields\Repeatable\Decoder
+class Decoder extends \Mpietrucha\Nova\Fields\Repeater\Decoder
 {
     /**
      * @return RepeatableTransformerInputFrame

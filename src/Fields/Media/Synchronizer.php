@@ -6,6 +6,7 @@ use Mpietrucha\Nova\Fields\Media\Synchronizer\Bucket;
 use Mpietrucha\Nova\Fields\Media\Synchronizer\Input;
 use Mpietrucha\Utility\Collection;
 use Mpietrucha\Utility\Enumerable\Contracts\EnumerableInterface;
+use Mpietrucha\Utility\Normalizer;
 use Spatie\MediaLibrary\HasMedia;
 
 abstract class Synchronizer
@@ -13,13 +14,15 @@ abstract class Synchronizer
     /**
      * @param  RepeatableTransformerOutput  $output
      */
-    public static function synchronize(HasMedia $model, string $attribute, array $output): void
+    public static function synchronize(HasMedia $model, string $attribute, array $output, ?string $disk = null): void
     {
         $bucket = $model->getMedia($attribute) |> Bucket::build(...);
 
         $model->clearMediaCollection($attribute);
 
-        static::get($bucket, $model, $output)->each->toMediaCollection($attribute);
+        $disk = Normalizer::string($disk);
+
+        static::get($bucket, $model, $output)->each->toMediaCollection($attribute, $disk);
 
         Bucket::flush();
     }

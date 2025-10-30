@@ -2,31 +2,34 @@
 
 namespace Mpietrucha\Nova\Fields;
 
+use Mpietrucha\Nova\Fields\Media\Adapter;
 use Mpietrucha\Nova\Fields\Media\Collection;
 use Mpietrucha\Nova\Fields\Media\Contracts\InteractsWithMediaInterface;
 
 abstract class Media
 {
-    public static function audio(?string $name = null): InteractsWithMediaInterface
+    public static function audio(?string $name = null): Audio
     {
         $name ??= __('mpietrucha-nova::media.fields.audio');
 
         return Audio::make($name) |> static::configure(...);
     }
 
-    public static function avatar(?string $name = null): InteractsWithMediaInterface
+    public static function avatar(?string $name = null): Avatar
     {
+        $name ??= __('mpietrucha-nova::media.fields.avatar');
+
         return Avatar::make($name) |> static::configure(...);
     }
 
-    public static function image(?string $name = null): InteractsWithMediaInterface
+    public static function image(?string $name = null): Image
     {
         $name ??= __('mpietrucha-nova::media.fields.image');
 
         return Image::make($name) |> static::configure(...);
     }
 
-    public static function file(?string $name = null): InteractsWithMediaInterface
+    public static function file(?string $name = null): File
     {
         $name ??= __('mpietrucha-nova::media.fields.file');
 
@@ -41,18 +44,10 @@ abstract class Media
         return Collection::make($name, $fields); /** @phpstan-ignore argument.type */
     }
 
-    protected static function configure(InteractsWithMediaInterface $media): InteractsWithMediaInterface
+    protected static function configure(InteractsWithMediaInterface $field): InteractsWithMediaInterface
     {
-        // $field->store(...);
+        Adapter::attach($field); /** @phpstan-ignore argument.type */
 
-        // $field->thumbnail(...);
-
-        // $field->preview(...);
-
-        // $field->download(...);
-
-        // $field->delete(...);
-
-        return $media;
+        return $field;
     }
 }

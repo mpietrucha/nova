@@ -1,6 +1,6 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields\Repeatable\Contracts;
+namespace Mpietrucha\Nova\Fields\Repeater\Contracts;
 
 use Mpietrucha\Utility\Contracts\CompatibleInterface;
 

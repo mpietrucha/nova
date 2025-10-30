@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'repeatable' => 'Translations',
+    'repeater' => 'Translations',
     'fields' => [
         'translations' => 'Translations',
         'language' => 'Language',

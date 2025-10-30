@@ -1,8 +1,8 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields\Repeatable;
+namespace Mpietrucha\Nova\Fields\Repeater;
 
-use Mpietrucha\Nova\Fields\Repeatable\Enums\Frame;
+use Mpietrucha\Nova\Fields\Repeater\Enums\Frame;
 use Mpietrucha\Utility\Arr;
 use Mpietrucha\Utility\Collection;
 use Mpietrucha\Utility\Concerns\Creatable;

@@ -8,6 +8,6 @@ class FieldPropertyException extends RuntimeException
 {
     public function configure(string $field, string $property): string
     {
-        return 'Field %s doesnt have property `%s`';
+        return 'Field %s does not have property `%s`';
     }
 }

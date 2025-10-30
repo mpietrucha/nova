@@ -11,7 +11,9 @@ abstract class Defaults
     {
         return [
             'rules' => 'rules',
+            'updateRules' => 'updateRules',
             'requiredCallback' => 'required',
+            'creationRules' => 'creationRules',
         ];
     }
 }

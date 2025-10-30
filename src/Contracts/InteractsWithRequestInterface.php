@@ -5,7 +5,7 @@ namespace Mpietrucha\Nova\Contracts;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 /**
- * @phpstan-require-extends \Laravel\Nova\Fields\Field
+ * @internal
  */
 interface InteractsWithRequestInterface
 {

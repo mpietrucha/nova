@@ -1,6 +1,6 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields\Repeatable\Enums;
+namespace Mpietrucha\Nova\Fields\Repeater\Enums;
 
 enum Frame: string
 {

@@ -3,11 +3,27 @@
 namespace Mpietrucha\Nova\Fields\Media;
 
 use Illuminate\Database\Eloquent\Model;
+use Mpietrucha\Nova\Fields\Media\Contracts\InteractsWithMediaInterface;
 use Mpietrucha\Nova\Fields\Media\Exception\ResourceModelException;
+use Mpietrucha\Utility\Instance;
 use Spatie\MediaLibrary\HasMedia;
 
-class Transformer extends \Mpietrucha\Nova\Fields\Repeatable\Transformer
+/**
+ * @phpstan-type TModel \Illuminate\Database\Eloquent\Model&\Spatie\MediaLibrary\HasMedia
+ */
+class Transformer extends \Mpietrucha\Nova\Fields\Repeater\Transformer
 {
+    public function __construct(protected InteractsWithMediaInterface $field)
+    {
+    }
+
+    public static function using(mixed $model): void
+    {
+        parent::using($model);
+
+        Instance::not($model, HasMedia::class) && ResourceModelException::create()->throw();
+    }
+
     public function encoder(): callable
     {
         return Encoder::create();
@@ -18,28 +34,28 @@ class Transformer extends \Mpietrucha\Nova\Fields\Repeatable\Transformer
         return Decoder::create();
     }
 
+    /**
+     * @param  TModel  $model
+     */
     protected function get(Model $model, string $attribute): array
     {
-        /** @phpstan-ignore-next-line method.notFound */
         $media = $model->getMedia($attribute);
 
         return $media->map->getPathRelativeToRoot()->all();
     }
 
+    /**
+     * @param  TModel  $model
+     */
     protected function set(Model $model, string $attribute, array $output): void
     {
-        /** @var \Illuminate\Database\Eloquent\Model&\Spatie\MediaLibrary\HasMedia $model */
-        Synchronizer::synchronize($model, $attribute, $output);
+        $disk = $this->field()->getStorageDisk();
+
+        Synchronizer::synchronize($model, $attribute, $output, $disk);
     }
 
-    protected static function using(mixed $model): void
+    protected function field(): InteractsWithMediaInterface
     {
-        parent::using($model);
-
-        if ($model instanceof HasMedia) {
-            return;
-        }
-
-        ResourceModelException::create()->throw();
+        return $this->field;
     }
 }

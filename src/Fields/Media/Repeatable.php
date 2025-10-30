@@ -4,10 +4,13 @@ namespace Mpietrucha\Nova\Fields\Media;
 
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Mpietrucha\Nova\Fields\Media\Contracts\InteractsWithMediaInterface;
-use Mpietrucha\Nova\Fields\Media\Exception\RepeatableFieldsException;
+use Mpietrucha\Nova\Fields\Media\Exception\RepeatableHydrationException;
 use Mpietrucha\Utility\Utilizer\Concerns\Utilizable;
 use Mpietrucha\Utility\Utilizer\Contracts\UtilizableInterface;
 
+/**
+ * @phpstan-type TMedia \Mpietrucha\Nova\Fields\Media\Contracts\InteractsWithMediaInterface
+ */
 class Repeatable extends \Laravel\Nova\Fields\Repeater\Repeatable implements UtilizableInterface
 {
     use Utilizable;
@@ -19,7 +22,7 @@ class Repeatable extends \Laravel\Nova\Fields\Repeater\Repeatable implements Uti
 
     public static function field(): InteractsWithMediaInterface
     {
-        return static::utilize() ?? RepeatableFieldsException::create()->throw();
+        return static::utilize() |> Collection::field(...) ?? RepeatableHydrationException::create()->throw();
     }
 
     public static function property(): string
@@ -33,13 +36,23 @@ class Repeatable extends \Laravel\Nova\Fields\Repeater\Repeatable implements Uti
     }
 
     /**
-     * @return list<\Mpietrucha\Nova\Fields\Media\Contracts\InteractsWithMediaInterface|\Mpietrucha\Nova\Fields\Media\Index>
+     * @return list<TMedia|\Mpietrucha\Nova\Fields\Media\Index>
      */
     public function fields(NovaRequest $request): array
     {
         return [
             Index::make(), /** @phpstan-ignore arguments.count */
-            static::field() |> static::field()::clone(...),
+            static::field() |> static::field()::replicate(...) |> static::configure(...),
         ];
+    }
+
+    /**
+     * @param  TMedia&\Laravel\Nova\Fields\File  $field
+     */
+    protected static function configure(InteractsWithMediaInterface $field): InteractsWithMediaInterface
+    {
+        Validation::repeatable($field);
+
+        return $field;
     }
 }

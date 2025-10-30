@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'repeatable' => 'Media',
     'fields' => [
         'audio' => 'Audio',
+        'avatar' => 'Avatar',
         'image' => 'Image',
         'file' => 'File',
     ],

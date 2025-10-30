@@ -7,8 +7,15 @@ use Mpietrucha\Nova\Fields\Translation\Exception\ResourceModelException;
 use Mpietrucha\Utility\Instance;
 use Spatie\Translatable\HasTranslations;
 
-class Transformer extends \Mpietrucha\Nova\Fields\Repeatable\Transformer
+class Transformer extends \Mpietrucha\Nova\Fields\Repeater\Transformer
 {
+    public static function using(mixed $model): void
+    {
+        parent::using($model);
+
+        Instance::traits($model)->doesntContain(HasTranslations::class) && ResourceModelException::create()->throw();
+    }
+
     public function encoder(): callable
     {
         return Encoder::create();
@@ -35,16 +42,5 @@ class Transformer extends \Mpietrucha\Nova\Fields\Repeatable\Transformer
 
         /** @phpstan-ignore-next-line method.notFound */
         $model->setTranslations($attribute, $output);
-    }
-
-    protected static function using(mixed $model): void
-    {
-        parent::using($model);
-
-        if (Instance::traits($model)->contains(HasTranslations::class)) {
-            return;
-        }
-
-        ResourceModelException::create()->throw();
     }
 }

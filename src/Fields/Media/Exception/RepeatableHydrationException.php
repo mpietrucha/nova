@@ -4,10 +4,10 @@ namespace Mpietrucha\Nova\Fields\Media\Exception;
 
 use Mpietrucha\Utility\Throwable\RuntimeException;
 
-class RepeatableFieldsException extends RuntimeException
+class RepeatableHydrationException extends RuntimeException
 {
     public function initilize(): void
     {
-        'Repeatable media must be hydrated before initialization' |> $this->message(...);
+        'Repeatable must be hydrated before initialization' |> $this->message(...);
     }
 }

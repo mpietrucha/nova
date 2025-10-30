@@ -9,6 +9,6 @@ class ResourceModelException extends InvalidArgumentException
 {
     public function initilize(): void
     {
-        $this->message('Model must use %s trait', HasTranslations::class);
+        $this->message('Resource model must use %s trait', HasTranslations::class);
     }
 }

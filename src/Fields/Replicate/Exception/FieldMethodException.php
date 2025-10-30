@@ -8,6 +8,6 @@ class FieldMethodException extends RuntimeException
 {
     public function configure(string $field, string $property): string
     {
-        return 'Field %s doesnt have method `%s`';
+        return 'Field %s does not have method `%s`';
     }
 }

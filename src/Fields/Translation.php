@@ -4,7 +4,6 @@ namespace Mpietrucha\Nova\Fields;
 
 use Mpietrucha\Nova\Concerns\InteractsWithRequest;
 use Mpietrucha\Nova\Contracts\InteractsWithRequestInterface;
-use Mpietrucha\Nova\Fields\Repeatable\Repeater;
 use Mpietrucha\Nova\Fields\Translation\Repeatable;
 use Mpietrucha\Nova\Fields\Translation\Select;
 use Mpietrucha\Nova\Fields\Translation\Transformer;

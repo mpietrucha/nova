@@ -1,12 +1,14 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields\Repeatable;
+namespace Mpietrucha\Nova\Fields;
 
 use Laravel\Nova\Fields\Repeater\Repeatable;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Mpietrucha\Nova\Concerns\InteractsWithIndicator;
 use Mpietrucha\Nova\Contracts\InteractsWithIndicatorInterface;
-use Mpietrucha\Nova\Fields\Repeatable\Contracts\TransformerInterface;
+use Mpietrucha\Nova\Fields\Repeater\Contracts\TransformerInterface;
+use Mpietrucha\Nova\Fields\Repeater\Exception\RepeaterNameException;
+use Mpietrucha\Nova\Fields\Repeater\Name;
 use Mpietrucha\Utility\Arr;
 use Mpietrucha\Utility\Normalizer;
 
@@ -19,6 +21,8 @@ class Repeater extends \Laravel\Nova\Fields\Repeater implements InteractsWithInd
         parent::__construct($name, $attribute);
 
         $this->indicate();
+
+        Name::forbidden($this) && RepeaterNameException::for($name)->throw();
     }
 
     public function repeatables(array|Repeatable $repeatables): static

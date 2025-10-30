@@ -2,7 +2,7 @@
 
 namespace Mpietrucha\Nova\Fields\Media;
 
-class Decoder extends \Mpietrucha\Nova\Fields\Repeatable\Decoder
+class Decoder extends \Mpietrucha\Nova\Fields\Repeater\Decoder
 {
     /**
      * @return RepeatableTransformerInputFrame

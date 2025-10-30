@@ -1,6 +1,6 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields\Repeatable\Exception;
+namespace Mpietrucha\Nova\Fields\Repeater\Exception;
 
 use Mpietrucha\Utility\Throwable\InvalidArgumentException;
 

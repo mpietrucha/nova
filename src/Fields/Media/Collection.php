@@ -2,35 +2,50 @@
 
 namespace Mpietrucha\Nova\Fields\Media;
 
+use Laravel\Nova\Fields\File;
 use Mpietrucha\Nova\Fields\Media\Contracts\InteractsWithMediaInterface;
 use Mpietrucha\Nova\Fields\Media\Exception\CollectionFieldException;
 use Mpietrucha\Nova\Fields\Media\Exception\CollectionFieldsException;
-use Mpietrucha\Nova\Fields\Repeatable\Repeater;
+use Mpietrucha\Nova\Fields\Repeater;
 use Mpietrucha\Utility\Arr;
 
+/**
+ * @phpstan-type TMedia \Mpietrucha\Nova\Fields\Media\Contracts\InteractsWithMediaInterface
+ */
 class Collection extends Repeater
 {
     /**
-     * @param  list<\Mpietrucha\Nova\Fields\Media\Contracts\InteractsWithMediaInterface>  $fields
+     * @param  list<TMedia>  $fields
      */
     public function __construct(string $name, array $fields)
     {
-        parent::__construct(Transformer::create(), $name);
+        $field = static::field($fields);
 
-        $this->field($fields) |> Repeatable::use(...);
+        parent::__construct(Transformer::create($field), $name);
+
+        Repeatable::use($field);
+
+        Validation::inherit($field, $this);
 
         Repeatable::make() |> $this->repeatables(...);
     }
 
     /**
-     * @param  list<\Mpietrucha\Nova\Fields\Media\Contracts\InteractsWithMediaInterface>  $fields
+     * @param  TMedia|list<TMedia>  $fields
+     * @return TMedia&\Laravel\Nova\Fields\File
      */
-    protected function field(array $fields): InteractsWithMediaInterface
+    public static function field(array|InteractsWithMediaInterface $fields): InteractsWithMediaInterface
     {
+        $fields = Arr::wrap($fields);
+
         Arr::count($fields) > 1 && CollectionFieldsException::create()->throw();
 
         $field = Arr::first($fields);
 
-        return $field instanceof InteractsWithMediaInterface ? $field : CollectionFieldException::create()->throw();
+        if ($field instanceof File && $field instanceof InteractsWithMediaInterface) {
+            return $field;
+        }
+
+        CollectionFieldException::create()->throw();
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields\Repeatable;
+namespace Mpietrucha\Nova\Fields\Repeater;
 
 use Illuminate\Database\Eloquent\Model;
-use Mpietrucha\Nova\Fields\Repeatable\Contracts\TransformerInterface;
-use Mpietrucha\Nova\Fields\Repeatable\Exception\ResourceModelException;
+use Mpietrucha\Nova\Fields\Repeater\Contracts\TransformerInterface;
+use Mpietrucha\Nova\Fields\Repeater\Exception\ResourceModelException;
 use Mpietrucha\Utility\Collection;
 use Mpietrucha\Utility\Concerns\Compatible;
 use Mpietrucha\Utility\Concerns\Creatable;
@@ -13,6 +13,11 @@ use Mpietrucha\Utility\Contracts\CreatableInterface;
 abstract class Transformer implements CreatableInterface, TransformerInterface
 {
     use Compatible, Creatable;
+
+    public static function using(mixed $model): void
+    {
+        static::incompatible($model) && ResourceModelException::create()->throw();
+    }
 
     public static function key(): string
     {
@@ -67,15 +72,6 @@ abstract class Transformer implements CreatableInterface, TransformerInterface
      * @param  RepeatableTransformerOutput  $output
      */
     abstract protected function set(Model $model, string $attribute, array $output): void;
-
-    protected static function using(mixed $model): void
-    {
-        if (static::compatible($model)) {
-            return;
-        }
-
-        ResourceModelException::create()->throw();
-    }
 
     final protected static function compatibility(mixed $model): bool
     {

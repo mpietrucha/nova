@@ -4,7 +4,7 @@ namespace Mpietrucha\Nova\Fields\Translation;
 
 use Mpietrucha\Utility\Normalizer;
 
-class Encoder extends \Mpietrucha\Nova\Fields\Repeatable\Encoder
+class Encoder extends \Mpietrucha\Nova\Fields\Repeater\Encoder
 {
     /**
      * @param  RepeatableTransformerInputFrame  $translation
