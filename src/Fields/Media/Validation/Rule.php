@@ -14,6 +14,8 @@ class Rule implements CreatableInterface
 {
     use Creatable;
 
+    public const string REQUIRED = 'required';
+
     public function __construct(protected Field $field)
     {
     }

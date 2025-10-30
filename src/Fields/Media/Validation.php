@@ -8,17 +8,20 @@ use Mpietrucha\Nova\Concerns\InteractsWithRequest;
 use Mpietrucha\Nova\Contracts\InteractsWithRequestInterface;
 use Mpietrucha\Nova\Fields\Media\Validation\Rule;
 use Mpietrucha\Utility\Collection;
+use Mpietrucha\Utility\Normalizer;
 use Mpietrucha\Utility\Value;
 
 abstract class Validation implements InteractsWithRequestInterface
 {
     use InteractsWithRequest;
 
-    public static function inherit(File $source, Field $destination, string $rule = 'required'): void
+    public static function inherit(File $source, Field $destination): void
     {
-        if (static::rules($source)->doesntContain($rule)) {
+        if (static::optional($source)) {
             return;
         }
+
+        $rule = Rule::REQUIRED;
 
         static::rules($destination)->prepend($rule)->all() |> $destination->rules(...);
     }
@@ -41,6 +44,16 @@ abstract class Validation implements InteractsWithRequestInterface
         $rule = Rule::repeatable();
 
         static::rules($field)->prepend($rule)->all() |> $field->rules(...);
+    }
+
+    public static function required(File $field): bool
+    {
+        return Rule::REQUIRED |> static::rules($field)->contains(...);
+    }
+
+    final public static function optional(File $field): bool
+    {
+        return static::required($field) |> Normalizer::not(...);
     }
 
     /**

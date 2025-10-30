@@ -16,6 +16,8 @@ trait Media
      * @var array<string, string>
      */
     protected static array $replicatable = [
+        'deletable' => 'deletable',
+        'prunable' => 'prunable',
         'downloadsAreEnabled' => 'enableDownload',
     ];
 }

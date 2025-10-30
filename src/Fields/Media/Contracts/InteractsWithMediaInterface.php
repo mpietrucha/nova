@@ -10,4 +10,6 @@ use Mpietrucha\Nova\Fields\Replicate\Contracts\ReplicatableInterface;
 interface InteractsWithMediaInterface extends ReplicatableInterface
 {
     public function enableDownload(bool $enabled = true): static;
+
+    public function persistent(bool $persistent = true): static;
 }

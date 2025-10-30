@@ -23,8 +23,3 @@ div[dusk$="-repeater-row"][data-indicator="mpietrucha-nova-fields-media-collecti
     > div:last-of-type {
     width: 100%;
 }
-
-div[dusk$="-repeater-row"][data-indicator="mpietrucha-nova-fields-media-collection"]
-    button[dusk$="-delete-link"] {
-    display: none;
-}

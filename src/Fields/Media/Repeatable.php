@@ -53,6 +53,6 @@ class Repeatable extends \Laravel\Nova\Fields\Repeater\Repeatable implements Uti
     {
         Validation::repeatable($field);
 
-        return $field;
+        return $field->persistent();
     }
 }
