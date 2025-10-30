@@ -120,7 +120,7 @@ class Adapter implements CreatableInterface, InteractsWithRequestInterface
     {
         $this->exists($model) && $this->get($model)->delete();
 
-        Transformer::key() |> $model->offsetUnset(...);
+        Transformer::flush($model);
 
         return [];
     }

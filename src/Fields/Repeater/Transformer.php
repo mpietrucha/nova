@@ -19,6 +19,13 @@ abstract class Transformer implements CreatableInterface, TransformerInterface
         static::incompatible($model) && ResourceModelException::create()->throw();
     }
 
+    public static function flush(mixed $model): void
+    {
+        static::using($model);
+
+        static::key() |> $model->offsetUnset(...);
+    }
+
     public static function key(): string
     {
         return 'nova_temporary_transformer_repeater';
@@ -60,7 +67,7 @@ abstract class Transformer implements CreatableInterface, TransformerInterface
 
         $this->set($model, $attribute, $output);
 
-        static::key() |> $model->offsetUnset(...);
+        static::flush($model);
     }
 
     /**

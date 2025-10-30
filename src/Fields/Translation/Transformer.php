@@ -8,11 +8,7 @@ use Mpietrucha\Utility\Instance;
 use Spatie\Translatable\HasTranslations;
 
 /**
- * @phpstan-param TModel Illuminate\Database\Eloquent\Model&object {
- *  getTranslations: callable
- * forgetTranslations: callable
- * setTranslations: callable
- * }
+ * @phpstan-type TModel \Illuminate\Database\Eloquent\Model&\Mpietrucha\Nova\Fields\Translation\Contracts\InteractsWithTranslationsInterface
  */
 class Transformer extends \Mpietrucha\Nova\Fields\Repeater\Transformer
 {
@@ -53,6 +49,7 @@ class Transformer extends \Mpietrucha\Nova\Fields\Repeater\Transformer
     {
         $model->forgetTranslations($attribute);
 
+        /** @var array<string, string> $output */
         $model->setTranslations($attribute, $output);
     }
 }
