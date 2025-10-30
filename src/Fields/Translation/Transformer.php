@@ -7,6 +7,13 @@ use Mpietrucha\Nova\Fields\Translation\Exception\ResourceModelException;
 use Mpietrucha\Utility\Instance;
 use Spatie\Translatable\HasTranslations;
 
+/**
+ * @phpstan-param TModel Illuminate\Database\Eloquent\Model&object {
+ *  getTranslations: callable
+ * forgetTranslations: callable
+ * setTranslations: callable
+ * }
+ */
 class Transformer extends \Mpietrucha\Nova\Fields\Repeater\Transformer
 {
     public static function using(mixed $model): void
@@ -31,16 +38,21 @@ class Transformer extends \Mpietrucha\Nova\Fields\Repeater\Transformer
         return parent::decode($output) ?: Decoder::default();
     }
 
+    /**
+     * @param  TModel  $model
+     */
     protected function get(Model $model, string $attribute): array
     {
-        return $model->getTranslations($attribute); /** @phpstan-ignore method.notFound */
+        return $model->getTranslations($attribute);
     }
 
+    /**
+     * @param  TModel  $model
+     */
     protected function set(Model $model, string $attribute, array $output): void
     {
-        $model->forgetTranslations($attribute); /** @phpstan-ignore method.notFound */
+        $model->forgetTranslations($attribute);
 
-        /** @phpstan-ignore-next-line method.notFound */
         $model->setTranslations($attribute, $output);
     }
 }
