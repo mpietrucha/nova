@@ -10,6 +10,20 @@ Nova.mp = {
     },
 
     media: component => {
+        const normalize = (data, name) => {
+            const value = data[name]
+
+            data[name] = value.split('/')?.[1] ?? value
+        }
+
+        const field = component._.props?.file
+
+        if (field) {
+            normalize(field, 'name')
+
+            return
+        }
+
         const fields = component._.props?.fields
 
         if (fields === undefined) {
@@ -18,13 +32,11 @@ Nova.mp = {
 
         fields
             .filter(field => field.component === 'repeater-field')
-            .map(repeater => repeater?.value?.[0]?.fields)
+            .map(fields => fields?.value?.[0]?.fields)
             .flat()
             .filter(Boolean)
             .filter(field => field.component === 'file-field')
-            .forEach(field => {
-                field.value = field.value.split('/')?.[1] ?? field.value
-            })
+            .forEach(field => normalize(field, 'value'))
     },
 }
 
