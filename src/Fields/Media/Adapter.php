@@ -2,151 +2,76 @@
 
 namespace Mpietrucha\Nova\Fields\Media;
 
-use Laravel\Nova\Fields\File;
-use Laravel\Nova\Http\Requests\NovaRequest;
 use Mpietrucha\Nova\Concerns\InteractsWithRequest;
 use Mpietrucha\Nova\Contracts\InteractsWithRequestInterface;
-use Mpietrucha\Nova\Fields\Media\Exception\MediaException;
+use Mpietrucha\Nova\Fields\Media\Adapter\Builder;
+use Mpietrucha\Nova\Fields\Media\Exception\ResourceModelException;
+use Mpietrucha\Nova\Fields\Repeater\Transformer;
 use Mpietrucha\Utility\Collection;
-use Mpietrucha\Utility\Concerns\Creatable;
-use Mpietrucha\Utility\Contracts\CreatableInterface;
+use Mpietrucha\Utility\Concerns\Compatible;
+use Mpietrucha\Utility\Contracts\CompatibleInterface;
 use Mpietrucha\Utility\Normalizer;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
-class Adapter implements CreatableInterface, InteractsWithRequestInterface
+abstract class Adapter implements CompatibleInterface, InteractsWithRequestInterface
 {
-    use Creatable, InteractsWithRequest;
+    use Compatible, InteractsWithRequest;
 
-    /**
-     * @var list<string>
-     */
-    protected static array $initializers = [
-        'resolveUsing',
-        'store',
-        'thumbnail',
-        'preview',
-        'download',
-        'delete',
-    ];
-
-    public function __construct(protected File $field)
+    public static function model(mixed $model): HasMedia
     {
-    }
-
-    public static function attach(File $field): static
-    {
-        $adapter = static::create($field);
-
-        $initializers = static::initializers();
-
-        while ($initializer = $initializers->pop()) {
-            $adapter->$initializer(...) |> $field->$initializer(...);
-        }
-
-        return $adapter;
-    }
-
-    public function exists(mixed $model): bool
-    {
-        return $this->attribute() |> $this->using($model)->hasMedia(...);
-    }
-
-    final public function unexists(mixed $model): bool
-    {
-        return $this->exists($model) |> Normalizer::not(...);
-    }
-
-    public function get(mixed $model): Media
-    {
-        $media = $this->attribute() |> $this->using($model)->getMedia(...);
-
-        return $media->first() ?? MediaException::create()->throw();
-    }
-
-    public function resolveUsing(mixed $value, mixed $model): ?string
-    {
-        if ($this->unexists($model)) {
-            return null;
-        }
-
-        return $this->get($model)->file_name;
-    }
-
-    /**
-     * @return array<int, string>
-     */
-    public function store(NovaRequest $request, mixed $model, string $attribute, string $requestAttribute): array
-    {
-        $media = $request->file($requestAttribute) |> $this->using($model)->addMedia(...);
-
-        $model->clearMediaCollection($attribute);
-
-        $disk = $this->field()->getStorageDisk() |> Normalizer::string(...);
-
-        $media->toMediaCollection($attribute, $disk);
-
-        return [];
-    }
-
-    public function thumbnail(mixed $value, ?string $disk, mixed $model): ?string
-    {
-        return $this->preview($value, $disk, $model);
-    }
-
-    public function preview(mixed $value, ?string $disk, mixed $model): ?string
-    {
-        if ($this->unexists($model)) {
-            return null;
-        }
-
-        return $this->get($model)->getUrl();
-    }
-
-    public function download(NovaRequest $request, mixed $model): ?StreamedResponse
-    {
-        if ($this->unexists($model)) {
-            return null;
-        }
-
-        return static::request() |> $this->get($model)->toResponse(...);
-    }
-
-    /**
-     * @return array<string, null|string>
-     */
-    public function delete(NovaRequest $request, mixed $model): array
-    {
-        $this->exists($model) && $this->get($model)->delete();
-
-        Transformer::flush($model);
-
-        return [];
-    }
-
-    protected function field(): File
-    {
-        return $this->field;
-    }
-
-    protected function using(mixed $model): HasMedia
-    {
-        Transformer::using($model);
+        static::incompatible($model) && ResourceModelException::create()->throw();
 
         return $model;
     }
 
-    protected function attribute(): string
+    public static function clear(mixed $model, string $attribute): void
     {
-        return $this->field()->attribute;
+        static::model($model)->clearMediaCollection($attribute);
+    }
+
+    public static function exists(mixed $model, string $attribute): bool
+    {
+        return static::model($model)->hasMedia($attribute);
+    }
+
+    final public static function unexists(mixed $model, string $attribute): bool
+    {
+        return static::exists($model, $attribute) |> Normalizer::not(...);
+    }
+
+    public static function builder(mixed $model): Builder
+    {
+        return static::model($model) |> Builder::create(...);
     }
 
     /**
-     * @return \Mpietrucha\Utility\Collection<int, string>
+     * @return \Mpietrucha\Utility\Collection<int, \Spatie\MediaLibrary\MediaCollections\Models\Media>
      */
-    protected static function initializers(): Collection
+    public static function get(mixed $model, string $attribute): Collection
     {
-        return static::$initializers |> Collection::create(...);
+        return static::model($model)->getMedia($attribute) |> Collection::bind(...);
+    }
+
+    public static function first(mixed $model, string $attribute): Media
+    {
+        $collection = static::get($model, $attribute);
+
+        return $collection->first() |> Attribute::model(...);
+    }
+
+    public static function download(mixed $model, string $attribute): ?StreamedResponse
+    {
+        if (static::unexists($model, $attribute)) {
+            return null;
+        }
+
+        return static::request() |> static::first($model, $attribute)->toResponse(...);
+    }
+
+    protected static function compatibility(mixed $model): bool
+    {
+        return Transformer::compatible($model) && $model instanceof HasMedia;
     }
 }

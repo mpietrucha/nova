@@ -7,7 +7,7 @@ use Mpietrucha\Utility\Utilizer\Contracts\UtilizableInterface;
 /**
  * @phpstan-require-extends \Laravel\Nova\Fields\Field
  */
-interface InteractsWithFieldInterface extends UtilizableInterface
+interface InteractsWithTranslationInterface extends UtilizableInterface
 {
     public static function name(): string;
 

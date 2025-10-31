@@ -5,14 +5,14 @@ namespace Mpietrucha\Nova\Fields\Translation;
 use Illuminate\Validation\Rule;
 use Mpietrucha\Nova\Concerns\InteractsWithRequest;
 use Mpietrucha\Nova\Contracts\InteractsWithRequestInterface;
-use Mpietrucha\Nova\Fields\Translation\Concerns\InteractsWithField;
-use Mpietrucha\Nova\Fields\Translation\Contracts\InteractsWithFieldInterface;
+use Mpietrucha\Nova\Fields\Translation\Concerns\InteractsWithTranslation;
+use Mpietrucha\Nova\Fields\Translation\Contracts\InteractsWithTranslationInterface;
 use Mpietrucha\Nova\Fields\Translation\Validation\Language;
 use Mpietrucha\Utility\Arr;
 
-class Select extends \Laravel\Nova\Fields\Select implements InteractsWithFieldInterface, InteractsWithRequestInterface
+class Select extends \Laravel\Nova\Fields\Select implements InteractsWithRequestInterface, InteractsWithTranslationInterface
 {
-    use InteractsWithField, InteractsWithRequest;
+    use InteractsWithRequest, InteractsWithTranslation;
 
     /**
      * @var array<int, array<string, mixed>>|null

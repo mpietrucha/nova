@@ -16,7 +16,7 @@ class Repeatable extends \Laravel\Nova\Fields\Repeater\Repeatable implements Uti
     }
 
     /**
-     * @return list<\Mpietrucha\Nova\Fields\Translation\Contracts\InteractsWithFieldInterface>
+     * @return list<\Mpietrucha\Nova\Fields\Translation\Contracts\InteractsWithTranslationInterface>
      */
     public function fields(NovaRequest $request): array
     {

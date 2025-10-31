@@ -6,37 +6,34 @@ use Mpietrucha\Nova\Fields\Media\Synchronizer\Bucket;
 use Mpietrucha\Nova\Fields\Media\Synchronizer\Input;
 use Mpietrucha\Utility\Collection;
 use Mpietrucha\Utility\Enumerable\Contracts\EnumerableInterface;
-use Mpietrucha\Utility\Normalizer;
-use Spatie\MediaLibrary\HasMedia;
 
 abstract class Synchronizer
 {
     /**
      * @param  RepeatableTransformerOutput  $output
      */
-    public static function synchronize(HasMedia $model, string $attribute, array $output, ?string $disk = null): void
+    public static function synchronize(mixed $model, string $attribute, array $output, ?string $disk = null): void
     {
-        $bucket = $model->getMedia($attribute) |> Bucket::build(...);
+        $bucket = Adapter::get($model, $attribute) |> Bucket::build(...);
 
-        $model->clearMediaCollection($attribute);
+        Adapter::clear($model, $attribute);
 
-        $disk = Normalizer::string($disk);
-
-        static::get($bucket, $model, $output)->each->toMediaCollection($attribute, $disk);
+        static::get($bucket, $model, $output)->each->build($attribute, $disk);
 
         Bucket::flush();
     }
 
     /**
      * @param  RepeatableTransformerOutput  $output
-     * @return \Mpietrucha\Utility\Enumerable\Contracts\EnumerableInterface<int, \Spatie\MediaLibrary\MediaCollections\FileAdder>
+     * @return \Mpietrucha\Utility\Enumerable\Contracts\EnumerableInterface<int, \Mpietrucha\Nova\Fields\Media\Adapter\Builder>
      */
-    public static function get(Bucket $bucket, HasMedia $model, array $output): EnumerableInterface
+    public static function get(Bucket $bucket, mixed $model, array $output): EnumerableInterface
     {
         return Collection::create($output)->pipeThrough([
-            fn (EnumerableInterface $media) => $media->whereInstanceOf(Input::class),
-            fn (EnumerableInterface $media) => $media->map->get($bucket),
-            fn (EnumerableInterface $media) => $model->addMedia(...) |> $media->filter()->map(...),
+            fn (EnumerableInterface $output) => $output->whereInstanceOf(Input::class),
+            fn (EnumerableInterface $output) => $output->map->get($bucket),
+            fn (EnumerableInterface $output) => $output->filter(),
+            fn (EnumerableInterface $output) => Adapter::builder($model) |> $output->map(...),
         ]);
     }
 }

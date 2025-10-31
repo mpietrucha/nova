@@ -2,12 +2,12 @@
 
 namespace Mpietrucha\Nova\Fields\Translation;
 
-use Mpietrucha\Nova\Fields\Translation\Concerns\InteractsWithField;
-use Mpietrucha\Nova\Fields\Translation\Contracts\InteractsWithFieldInterface;
+use Mpietrucha\Nova\Fields\Translation\Concerns\InteractsWithTranslation;
+use Mpietrucha\Nova\Fields\Translation\Contracts\InteractsWithTranslationInterface;
 
-class Text extends \Mpietrucha\Nova\Fields\Text implements InteractsWithFieldInterface
+class Text extends \Mpietrucha\Nova\Fields\Text implements InteractsWithTranslationInterface
 {
-    use InteractsWithField;
+    use InteractsWithTranslation;
 
     final public static function property(): string
     {

@@ -2,9 +2,9 @@
 
 namespace Mpietrucha\Nova\Fields\Media\Exception;
 
-use Mpietrucha\Utility\Throwable\RuntimeException;
+use Mpietrucha\Utility\Throwable\InvalidArgumentException;
 
-class CollectionFieldsException extends RuntimeException
+class CollectionFieldsException extends InvalidArgumentException
 {
     public function initialize(): void
     {

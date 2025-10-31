@@ -4,9 +4,6 @@ namespace Mpietrucha\Nova\Fields\Media;
 
 use Illuminate\Database\Eloquent\Model;
 use Mpietrucha\Nova\Fields\Media\Contracts\InteractsWithMediaInterface;
-use Mpietrucha\Nova\Fields\Media\Exception\ResourceModelException;
-use Mpietrucha\Utility\Instance;
-use Spatie\MediaLibrary\HasMedia;
 
 /**
  * @phpstan-type TModel \Illuminate\Database\Eloquent\Model&\Spatie\MediaLibrary\HasMedia
@@ -17,11 +14,9 @@ class Transformer extends \Mpietrucha\Nova\Fields\Repeater\Transformer
     {
     }
 
-    public static function using(mixed $model): void
+    public static function model(mixed $model): void
     {
-        parent::using($model);
-
-        Instance::not($model, HasMedia::class) && ResourceModelException::create()->throw();
+        Adapter::model($model);
     }
 
     public function encoder(): callable
@@ -39,9 +34,9 @@ class Transformer extends \Mpietrucha\Nova\Fields\Repeater\Transformer
      */
     protected function get(Model $model, string $attribute): array
     {
-        $media = $model->getMedia($attribute);
+        $media = Attribute::name(...) |> Adapter::get($model, $attribute)->map(...);
 
-        return $media->map->getPathRelativeToRoot()->all();
+        return $media->all();
     }
 
     /**

@@ -7,9 +7,9 @@ use Mpietrucha\Utility\Instance\Method;
 use Mpietrucha\Utility\Utilizer\Concerns\Utilizable;
 
 /**
- * @phpstan-require-implements \Mpietrucha\Nova\Fields\Translation\Contracts\InteractsWithFieldInterface
+ * @phpstan-require-implements \Mpietrucha\Nova\Fields\Translation\Contracts\InteractsWithTranslationInterface
  */
-trait InteractsWithField
+trait InteractsWithTranslation
 {
     use Utilizable\Strings;
 

@@ -6,6 +6,8 @@ use Mpietrucha\Utility\Contracts\CompatibleInterface;
 
 interface TransformerInterface extends CompatibleInterface
 {
+    public static function model(mixed $model): void;
+
     public function decoder(): callable;
 
     public function encoder(): callable;

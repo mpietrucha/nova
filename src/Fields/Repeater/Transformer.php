@@ -9,26 +9,27 @@ use Mpietrucha\Utility\Collection;
 use Mpietrucha\Utility\Concerns\Compatible;
 use Mpietrucha\Utility\Concerns\Creatable;
 use Mpietrucha\Utility\Contracts\CreatableInterface;
+use Mpietrucha\Utility\Str;
 
 abstract class Transformer implements CreatableInterface, TransformerInterface
 {
     use Compatible, Creatable;
 
-    public static function using(mixed $model): void
+    public static function model(mixed $model): void
     {
         static::incompatible($model) && ResourceModelException::create()->throw();
     }
 
     public static function flush(mixed $model): void
     {
-        static::using($model);
+        static::model($model);
 
         static::key() |> $model->offsetUnset(...);
     }
 
     public static function key(): string
     {
-        return 'nova_temporary_transformer_repeater';
+        return 'repeater_' . static::class |> Str::hash(...);
     }
 
     public function encode(array $input): array
@@ -47,7 +48,7 @@ abstract class Transformer implements CreatableInterface, TransformerInterface
 
     public function hydrate(mixed $model, string $attribute): string
     {
-        static::using($model);
+        static::model($model);
 
         $input = $this->get($model, $attribute) |> $this->decode(...);
 
@@ -61,7 +62,7 @@ abstract class Transformer implements CreatableInterface, TransformerInterface
      */
     public function fill(mixed $model, string $attribute, array $input): void
     {
-        static::using($model);
+        static::model($model);
 
         $output = $this->encode($input);
 

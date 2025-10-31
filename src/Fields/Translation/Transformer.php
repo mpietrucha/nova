@@ -12,9 +12,9 @@ use Spatie\Translatable\HasTranslations;
  */
 class Transformer extends \Mpietrucha\Nova\Fields\Repeater\Transformer
 {
-    public static function using(mixed $model): void
+    public static function model(mixed $model): void
     {
-        parent::using($model);
+        parent::model($model);
 
         Instance::traits($model)->doesntContain(HasTranslations::class) && ResourceModelException::create()->throw();
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Mpietrucha\Nova\Contracts;
+namespace Mpietrucha\Nova\Fields\Contracts;
 
 /**
  * @phpstan-require-extends \Laravel\Nova\Fields\Field

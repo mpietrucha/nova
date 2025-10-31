@@ -1,12 +1,12 @@
 <?php
 
-namespace Mpietrucha\Nova\Concerns;
+namespace Mpietrucha\Nova\Fields\Concerns;
 
 use Mpietrucha\Utility\Instance\Path;
 use Mpietrucha\Utility\Str;
 
 /**
- * @phpstan-require-implements \Mpietrucha\Nova\Contracts\InteractsWithIndicatorInterface
+ * @phpstan-require-implements \Mpietrucha\Nova\Fields\Contracts\InteractsWithIndicatorInterface
  */
 trait InteractsWithIndicator
 {

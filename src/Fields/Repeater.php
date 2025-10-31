@@ -4,8 +4,8 @@ namespace Mpietrucha\Nova\Fields;
 
 use Laravel\Nova\Fields\Repeater\Repeatable;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Mpietrucha\Nova\Concerns\InteractsWithIndicator;
-use Mpietrucha\Nova\Contracts\InteractsWithIndicatorInterface;
+use Mpietrucha\Nova\Fields\Concerns\InteractsWithIndicator;
+use Mpietrucha\Nova\Fields\Contracts\InteractsWithIndicatorInterface;
 use Mpietrucha\Nova\Fields\Repeater\Contracts\TransformerInterface;
 use Mpietrucha\Nova\Fields\Repeater\Exception\RepeaterNameException;
 use Mpietrucha\Nova\Fields\Repeater\Name;
@@ -40,9 +40,9 @@ class Repeater extends \Laravel\Nova\Fields\Repeater implements InteractsWithInd
         return parent::resolveAttribute($model, $attribute);
     }
 
-    protected function fillAttribute(NovaRequest $request, string $requestAttribute, object $model, string $attribute): void
+    protected function fillAttribute(NovaRequest $request, string $key, object $model, string $attribute): void
     {
-        $input = $request->all($requestAttribute) |> Arr::first(...) |> Normalizer::array(...);
+        $input = $request->all($key) |> Arr::first(...) |> Normalizer::array(...);
 
         $this->transformer()->fill($model, $attribute, $input);
     }

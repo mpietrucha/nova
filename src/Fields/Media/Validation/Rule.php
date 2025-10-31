@@ -22,11 +22,11 @@ class Rule implements CreatableInterface
 
     public function __invoke(): bool
     {
-        $handler = $this->adapter()->exists(...);
+        $handler = Adapter::exists(...);
 
-        $resource = $this->resource();
+        $model = $this->field()->resource;
 
-        return Value::attempt($handler)->get($resource)->boolean();
+        return Value::attempt($handler)->boolean($model, $this->field()->attribute);
     }
 
     public static function repeatable(): string
@@ -39,16 +39,6 @@ class Rule implements CreatableInterface
         $condition = static::create($field) |> Closure::fromCallable(...);
 
         return new ExcludeIf($condition);
-    }
-
-    protected function adapter(): Adapter
-    {
-        return $this->field() |> Adapter::create(...);
-    }
-
-    protected function resource(): mixed
-    {
-        return $this->field()->resource;
     }
 
     protected function field(): Field

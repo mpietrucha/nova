@@ -17,6 +17,11 @@ class Tag extends \Laravel\Nova\Fields\Tag implements CompatibleInterface, Inter
     use Compatible, Guessable, InteractsWithRequest, Replicatable\Relation, SupportsWithTrashedRelatables;
 
     /**
+     * @var string
+     */
+    public $style = self::LIST_STYLE;
+
+    /**
      * @var array<string, string>
      */
     protected static $replicate = [
