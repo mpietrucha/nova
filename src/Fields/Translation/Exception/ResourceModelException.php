@@ -7,7 +7,7 @@ use Spatie\Translatable\HasTranslations;
 
 class ResourceModelException extends InvalidArgumentException
 {
-    public function initilize(): void
+    public function initialize(): void
     {
         $this->message('Resource model must use %s trait', HasTranslations::class);
     }

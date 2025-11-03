@@ -1,25 +1,27 @@
-div:has(> [dusk$="-repeater-row"]:nth-of-type(1):last-of-type)
-    > [dusk$="-repeater-row"][data-indicator="mpietrucha-nova-fields-translation"]
-    > div:first-of-type {
-    display: none;
+[data-indicator^="mpietrucha-nova-fields"]
+    > div:first-child:has(> label span.text-red-500)
+    + div
+    div[data-repeater-id][data-indicator^="mpietrucha-nova-fields"]:first-of-type
+    [dusk="row-delete-button"] {
+    display: none !important;
 }
 
 div:has(> [dusk$="-repeater-row"]) + div {
     margin-top: 1rem !important;
 }
 
-div[dusk$="-repeater-row"][data-indicator="mpietrucha-nova-fields-media-collection"]
+div[dusk$="-repeater-row"]
     > div:last-of-type
     > div
     > div:first-of-type
-    > div:first-of-type {
-    display: none;
+    > div:last-of-type {
+    width: 100%;
 }
 
 div[dusk$="-repeater-row"][data-indicator="mpietrucha-nova-fields-media-collection"]
     > div:last-of-type
     > div
     > div:first-of-type
-    > div:last-of-type {
-    width: 100%;
+    > div:first-of-type {
+    display: none;
 }

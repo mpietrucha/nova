@@ -41,11 +41,6 @@ class Select extends \Laravel\Nova\Fields\Select implements InteractsWithRequest
         return 'language';
     }
 
-    protected static function hydrate(): string
-    {
-        return __('mpietrucha-nova::translation.fields.language');
-    }
-
     protected function configure(): void
     {
         $this->defaultCallback = static::$language;
@@ -72,5 +67,10 @@ class Select extends \Laravel\Nova\Fields\Select implements InteractsWithRequest
     protected function selectable(): array
     {
         return $this->selectable ??= static::request() |> $this->isSearchable(...) |> parent::serializeOptions(...);
+    }
+
+    protected static function hydrate(): string
+    {
+        return __('mpietrucha-nova::translation.fields.language');
     }
 }

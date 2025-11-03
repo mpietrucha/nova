@@ -39,7 +39,7 @@ trait InteractsWithMedia
     {
         Validation::required($this) && $this->persistent();
 
-        Validation::assign($this);
+        Validation::media($this);
 
         return parent::getRules($request);
     }

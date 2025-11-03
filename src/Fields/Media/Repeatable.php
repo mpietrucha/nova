@@ -41,7 +41,7 @@ class Repeatable extends \Laravel\Nova\Fields\Repeater\Repeatable implements Uti
     public function fields(NovaRequest $request): array
     {
         return [
-            Index::make(), /** @phpstan-ignore arguments.count */
+            Index::make(),
             static::field() |> static::field()::replicate(...) |> static::configure(...),
         ];
     }

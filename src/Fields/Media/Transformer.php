@@ -4,6 +4,7 @@ namespace Mpietrucha\Nova\Fields\Media;
 
 use Illuminate\Database\Eloquent\Model;
 use Mpietrucha\Nova\Fields\Media\Contracts\InteractsWithMediaInterface;
+use Mpietrucha\Nova\Fields\Repeater;
 
 /**
  * @phpstan-type TModel \Illuminate\Database\Eloquent\Model&\Spatie\MediaLibrary\HasMedia
@@ -32,7 +33,7 @@ class Transformer extends \Mpietrucha\Nova\Fields\Repeater\Transformer
     /**
      * @param  TModel  $model
      */
-    protected function get(Model $model, string $attribute): array
+    protected function get(Model $model, string $attribute, Repeater $repeater): array
     {
         $media = Attribute::name(...) |> Adapter::get($model, $attribute)->map(...);
 
@@ -42,7 +43,7 @@ class Transformer extends \Mpietrucha\Nova\Fields\Repeater\Transformer
     /**
      * @param  TModel  $model
      */
-    protected function set(Model $model, string $attribute, array $output): void
+    protected function set(Model $model, string $attribute, array $output, Repeater $repeater): void
     {
         $disk = $this->field()->getStorageDisk();
 

@@ -2,6 +2,7 @@
 
 namespace Mpietrucha\Nova\Fields\Repeater\Contracts;
 
+use Mpietrucha\Nova\Fields\Repeater;
 use Mpietrucha\Utility\Contracts\CompatibleInterface;
 
 interface TransformerInterface extends CompatibleInterface
@@ -24,10 +25,10 @@ interface TransformerInterface extends CompatibleInterface
      */
     public function decode(array $output): array;
 
-    public function hydrate(mixed $model, string $attribute): string;
+    public function hydrate(Repeater $repeater, mixed $model, string $attribute): string;
 
     /**
      * @param  RepeatableTransformerInput  $input
      */
-    public function fill(mixed $model, string $attribute, array $input): void;
+    public function fill(Repeater $repeater, mixed $model, string $attribute, array $input): void;
 }

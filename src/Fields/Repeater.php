@@ -35,7 +35,7 @@ class Repeater extends \Laravel\Nova\Fields\Repeater implements InteractsWithInd
      */
     protected function resolveAttribute(mixed $model, string $attribute): mixed
     {
-        $attribute = $this->transformer()->hydrate($model, $attribute);
+        $attribute = $this->transformer()->hydrate($this, $model, $attribute);
 
         return parent::resolveAttribute($model, $attribute);
     }
@@ -44,7 +44,7 @@ class Repeater extends \Laravel\Nova\Fields\Repeater implements InteractsWithInd
     {
         $input = $request->all($key) |> Arr::first(...) |> Normalizer::array(...);
 
-        $this->transformer()->fill($model, $attribute, $input);
+        $this->transformer()->fill($this, $model, $attribute, $input);
     }
 
     protected function transformer(): TransformerInterface

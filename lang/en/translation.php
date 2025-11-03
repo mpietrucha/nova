@@ -8,6 +8,6 @@ return [
         'translation' => 'Translation',
     ],
     'validation' => [
-        'language' => 'Language must be unique',
+        'language' => 'Language already in use',
     ],
 ];

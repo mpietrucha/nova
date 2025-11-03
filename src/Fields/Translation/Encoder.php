@@ -18,6 +18,6 @@ class Encoder extends \Mpietrucha\Nova\Fields\Repeater\Encoder
             return [];
         }
 
-        return [Select::property() |> $fields->get(...) => Text::property() |> $fields->get(...) |> Normalizer::string(...)];
+        return [Select::property() |> $fields->get(...) => Textarea::property() |> $fields->get(...) |> Normalizer::string(...)];
     }
 }

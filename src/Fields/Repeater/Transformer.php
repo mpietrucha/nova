@@ -3,6 +3,7 @@
 namespace Mpietrucha\Nova\Fields\Repeater;
 
 use Illuminate\Database\Eloquent\Model;
+use Mpietrucha\Nova\Fields\Repeater;
 use Mpietrucha\Nova\Fields\Repeater\Contracts\TransformerInterface;
 use Mpietrucha\Nova\Fields\Repeater\Exception\ResourceModelException;
 use Mpietrucha\Utility\Collection;
@@ -46,11 +47,11 @@ abstract class Transformer implements CreatableInterface, TransformerInterface
         return $input->values()->all();
     }
 
-    public function hydrate(mixed $model, string $attribute): string
+    public function hydrate(Repeater $repeater, mixed $model, string $attribute): string
     {
         static::model($model);
 
-        $input = $this->get($model, $attribute) |> $this->decode(...);
+        $input = $this->get($model, $attribute, $repeater) |> $this->decode(...);
 
         $model->offsetSet($key = static::key(), $input);
 
@@ -60,13 +61,11 @@ abstract class Transformer implements CreatableInterface, TransformerInterface
     /**
      * @param  RepeatableTransformerInput  $input
      */
-    public function fill(mixed $model, string $attribute, array $input): void
+    public function fill(Repeater $repeater, mixed $model, string $attribute, array $input): void
     {
         static::model($model);
 
-        $output = $this->encode($input);
-
-        $this->set($model, $attribute, $output);
+        $this->set($model, $attribute, $this->encode($input), $repeater);
 
         static::flush($model);
     }
@@ -74,12 +73,12 @@ abstract class Transformer implements CreatableInterface, TransformerInterface
     /**
      * @return RepeatableTransformerOutput
      */
-    abstract protected function get(Model $model, string $attribute): array;
+    abstract protected function get(Model $model, string $attribute, Repeater $repeater): array;
 
     /**
      * @param  RepeatableTransformerOutput  $output
      */
-    abstract protected function set(Model $model, string $attribute, array $output): void;
+    abstract protected function set(Model $model, string $attribute, array $output, Repeater $repeater): void;
 
     final protected static function compatibility(mixed $model): bool
     {

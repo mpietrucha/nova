@@ -1,6 +1,6 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields\Enum;
+namespace Mpietrucha\Nova\Fields\Group;
 
 use BackedEnum;
 use Laravel\Nova\Nova;

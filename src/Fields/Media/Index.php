@@ -4,6 +4,9 @@ namespace Mpietrucha\Nova\Fields\Media;
 
 use Laravel\Nova\Fields\Hidden;
 
+/**
+ * @phpstan-method static static make()
+ */
 class Index extends Hidden
 {
     public function __construct()

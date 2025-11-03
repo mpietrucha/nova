@@ -1,7 +1,8 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields;
+namespace Mpietrucha\Nova\Fields\Tag;
 
+use Mpietrucha\Nova\Fields\Tag;
 use Mpietrucha\Utility\Arr;
 use Mpietrucha\Utility\Concerns\Arrayable;
 use Mpietrucha\Utility\Contracts\ArrayableInterface;
@@ -10,7 +11,7 @@ use Mpietrucha\Utility\Value;
 /**
  * @implements \Mpietrucha\Utility\Contracts\ArrayableInterface<int, \Laravel\Nova\Fields\Field>
  */
-class TaggableBelongsToMany extends BelongsToMany implements ArrayableInterface
+class BelongsToMany extends \Mpietrucha\Nova\Fields\BelongsToMany implements ArrayableInterface
 {
     use Arrayable;
 

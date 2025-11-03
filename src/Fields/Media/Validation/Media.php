@@ -10,11 +10,9 @@ use Mpietrucha\Utility\Concerns\Creatable;
 use Mpietrucha\Utility\Contracts\CreatableInterface;
 use Mpietrucha\Utility\Value;
 
-class Rule implements CreatableInterface
+class Media implements CreatableInterface
 {
     use Creatable;
-
-    public const string REQUIRED = 'required';
 
     public function __construct(protected Field $field)
     {
@@ -27,11 +25,6 @@ class Rule implements CreatableInterface
         $model = $this->field()->resource;
 
         return Value::attempt($handler)->boolean($model, $this->field()->attribute);
-    }
-
-    public static function repeatable(): string
-    {
-        return Repeatable::get();
     }
 
     public static function get(Field $field): ExcludeIf

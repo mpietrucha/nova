@@ -21,8 +21,8 @@ class Repeatable extends \Laravel\Nova\Fields\Repeater\Repeatable implements Uti
     public function fields(NovaRequest $request): array
     {
         return [
-            Select::make(), /** @phpstan-ignore arguments.count */
-            Text::make(), /** @phpstan-ignore arguments.count */
+            Select::make(),
+            Textarea::make(),
         ];
     }
 
