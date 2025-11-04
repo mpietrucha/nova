@@ -2,8 +2,13 @@
 
 namespace Mpietrucha\Nova\Enum\Contracts;
 
-interface InteractsWithNovaInterface
+use BackedEnum;
+
+interface InteractsWithNovaInterface extends BackedEnum
 {
+    /**
+     * @return class-string<static>
+     */
     public static function options(): string;
 
     public static function default(): static;

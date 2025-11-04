@@ -5,6 +5,9 @@ namespace Mpietrucha\Nova\Enum\Concerns;
 use Mpietrucha\Utility\Arr;
 use Mpietrucha\Utility\Str;
 
+/**
+ * @phpstan-require-implements \Mpietrucha\Nova\Enum\Contracts\InteractsWithNovaInterface
+ */
 trait InteractsWithNova
 {
     public static function options(): string
