@@ -13,11 +13,16 @@ use Mpietrucha\Nova\Resources\Flattener;
  */
 abstract class Resource extends \Laravel\Nova\Resource
 {
-    /**
-     * @return \Laravel\Nova\Fields\FieldCollection<int, \Laravel\Nova\Fields\Field>
-     */
     public function availableFields(NovaRequest $request): FieldCollection
     {
         return parent::availableFields($request) |> Flattener::flatten(...);
+    }
+
+    /**
+     * @param  list<string>  $methods
+     */
+    public function buildAvailableFields(NovaRequest $request, array $methods): FieldCollection
+    {
+        return parent::buildAvailableFields($request, $methods) |> Flattener::flatten(...);
     }
 }
