@@ -3,35 +3,38 @@
 namespace Mpietrucha\Nova\Fields;
 
 use Laravel\Nova\Fields\File as Field;
+use Mpietrucha\Nova\Concerns\InteractsWithTranslations;
 use Mpietrucha\Nova\Fields\Media\Collection;
 use Mpietrucha\Nova\Fields\Media\Initializer;
 
 abstract class Media
 {
+    use InteractsWithTranslations;
+
     public static function audio(?string $name = null): Audio
     {
-        $name ??= __('mpietrucha-nova::media.fields.audio');
+        $name ??= static::__('media.fields.audio');
 
         return Audio::make($name) |> static::initialize(...);
     }
 
     public static function avatar(?string $name = null): Avatar
     {
-        $name ??= __('mpietrucha-nova::media.fields.avatar');
+        $name ??= static::__('media.fields.avatar');
 
         return Avatar::make($name) |> static::initialize(...);
     }
 
     public static function image(?string $name = null): Image
     {
-        $name ??= __('mpietrucha-nova::media.fields.image');
+        $name ??= static::__('media.fields.image');
 
         return Image::make($name) |> static::initialize(...);
     }
 
     public static function file(?string $name = null): File
     {
-        $name ??= __('mpietrucha-nova::media.fields.file');
+        $name = $name ?? static::__('media.fields.file');
 
         return File::make($name) |> static::initialize(...);
     }

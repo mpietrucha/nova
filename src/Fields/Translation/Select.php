@@ -4,6 +4,7 @@ namespace Mpietrucha\Nova\Fields\Translation;
 
 use Illuminate\Validation\Rule;
 use Mpietrucha\Nova\Concerns\InteractsWithRequest;
+use Mpietrucha\Nova\Concerns\InteractsWithTranslations;
 use Mpietrucha\Nova\Contracts\InteractsWithRequestInterface;
 use Mpietrucha\Nova\Fields\Translation\Concerns\InteractsWithTranslation;
 use Mpietrucha\Nova\Fields\Translation\Contracts\InteractsWithTranslationInterface;
@@ -12,7 +13,7 @@ use Mpietrucha\Utility\Arr;
 
 class Select extends \Laravel\Nova\Fields\Select implements InteractsWithRequestInterface, InteractsWithTranslationInterface
 {
-    use InteractsWithRequest, InteractsWithTranslation;
+    use InteractsWithRequest, InteractsWithTranslation, InteractsWithTranslations;
 
     /**
      * @var array<int, array<string, mixed>>|null
@@ -71,6 +72,6 @@ class Select extends \Laravel\Nova\Fields\Select implements InteractsWithRequest
 
     protected static function hydrate(): string
     {
-        return __('mpietrucha-nova::translation.fields.language');
+        return static::__('translation.fields.language');
     }
 }

@@ -3,12 +3,13 @@
 namespace Mpietrucha\Nova\Fields\Translation;
 
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Mpietrucha\Nova\Concerns\InteractsWithTranslations;
 use Mpietrucha\Utility\Utilizer\Concerns\Utilizable;
 use Mpietrucha\Utility\Utilizer\Contracts\UtilizableInterface;
 
 class Repeatable extends \Laravel\Nova\Fields\Repeater\Repeatable implements UtilizableInterface
 {
-    use Utilizable\Strings;
+    use InteractsWithTranslations, Utilizable\Strings;
 
     public static function label(): string
     {
@@ -28,6 +29,6 @@ class Repeatable extends \Laravel\Nova\Fields\Repeater\Repeatable implements Uti
 
     protected static function hydrate(): string
     {
-        return __('mpietrucha-nova::translation.repeater');
+        return static::__('translation.repeater');
     }
 }

@@ -1,5 +1,4 @@
 includes:
-    - extension.neon
     - vendor/mpietrucha/utility/extension.neon
     - vendor/larastan/larastan/extension.neon
 parameters:
@@ -8,3 +7,12 @@ parameters:
         - src
     ignoreErrors:
         - identifier: "trait.unused"
+        -
+            message: '#Call to an undefined static method Mpietrucha\\Nova\\Cards\\Filterable\\Filter::[a-zA-Z0-9_]+\(\)#'
+    typeAliases:
+        RepeatableTransformerInputFrameFieldsCollection: "\\Mpietrucha\\Utility\\Enumerable\\Contracts\\EnumerableInterface<string, null|int|string>"
+        RepeatableTransformerInputFrameFields: "array<string, null|int|string>"
+        RepeatableTransformerInputFrame: "array{type: string, fields: RepeatableTransformerInputFrameFields}"
+        RepeatableTransformerInput: "list<RepeatableTransformerInputFrame>"
+        RepeatableTransformerOutputFrame: "array<array-key, null|object|string>"
+        RepeatableTransformerOutput: "RepeatableTransformerOutputFrame"

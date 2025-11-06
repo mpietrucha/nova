@@ -1,3 +1,5 @@
+import Filterable from './components/Filterable'
+
 Nova.mp = {
     indicate: component => {
         const indicator = component._.props?.field?.indicator
@@ -41,6 +43,8 @@ Nova.mp = {
 }
 
 Nova.booting((Vue, router, store) => {
+    Vue.component('mpietrucha-filterable', Filterable)
+
     Vue.mixin({
         mounted() {
             Nova.mp.media(this)

@@ -1,8 +1,0 @@
-parameters:
-    typeAliases:
-        RepeatableTransformerInputFrameFieldsCollection: "\\Mpietrucha\\Utility\\Enumerable\\Contracts\\EnumerableInterface<string, null|int|string>"
-        RepeatableTransformerInputFrameFields: "array<string, null|int|string>"
-        RepeatableTransformerInputFrame: "array{type: string, fields: RepeatableTransformerInputFrameFields}"
-        RepeatableTransformerInput: "list<RepeatableTransformerInputFrame>"
-        RepeatableTransformerOutputFrame: "array<array-key, null|object|string>"
-        RepeatableTransformerOutput: "RepeatableTransformerOutputFrame"

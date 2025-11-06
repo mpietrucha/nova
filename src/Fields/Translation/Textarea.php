@@ -2,12 +2,13 @@
 
 namespace Mpietrucha\Nova\Fields\Translation;
 
+use Mpietrucha\Nova\Concerns\InteractsWithTranslations;
 use Mpietrucha\Nova\Fields\Translation\Concerns\InteractsWithTranslation;
 use Mpietrucha\Nova\Fields\Translation\Contracts\InteractsWithTranslationInterface;
 
 class Textarea extends \Mpietrucha\Nova\Fields\Textarea implements InteractsWithTranslationInterface
 {
-    use InteractsWithTranslation;
+    use InteractsWithTranslation, InteractsWithTranslations;
 
     final public static function property(): string
     {
@@ -21,6 +22,6 @@ class Textarea extends \Mpietrucha\Nova\Fields\Textarea implements InteractsWith
 
     protected static function hydrate(): string
     {
-        return __('mpietrucha-nova::translation.fields.translation');
+        return static::__('translation.fields.translation');
     }
 }

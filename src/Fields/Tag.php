@@ -21,13 +21,6 @@ class Tag extends \Laravel\Nova\Fields\Tag implements CompatibleInterface, Inter
      */
     public $style = self::LIST_STYLE;
 
-    /**
-     * @var array<string, string>
-     */
-    protected static $replicate = [
-        'searchable' => 'preload',
-    ];
-
     protected static function compatibility(): bool
     {
         if (static::request()->isInlineCreateRequest()) {
