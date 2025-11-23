@@ -9,7 +9,7 @@ use Mpietrucha\Utility\Utilizer\Concerns\Utilizable;
 use Mpietrucha\Utility\Utilizer\Contracts\UtilizableInterface;
 
 /**
- * @phpstan-type TMedia \Mpietrucha\Nova\Fields\Media\Contracts\InteractsWithMediaInterface
+ * @phpstan-import-type MediaField from \Mpietrucha\Nova\Fields\Media\Collection
  */
 class Repeatable extends \Laravel\Nova\Fields\Repeater\Repeatable implements UtilizableInterface
 {
@@ -36,7 +36,7 @@ class Repeatable extends \Laravel\Nova\Fields\Repeater\Repeatable implements Uti
     }
 
     /**
-     * @return list<TMedia|\Mpietrucha\Nova\Fields\Media\Index>
+     * @return list<MediaField|\Mpietrucha\Nova\Fields\Media\Index>
      */
     public function fields(NovaRequest $request): array
     {
@@ -47,7 +47,7 @@ class Repeatable extends \Laravel\Nova\Fields\Repeater\Repeatable implements Uti
     }
 
     /**
-     * @param  TMedia&\Laravel\Nova\Fields\File  $field
+     * @param  MediaField&\Laravel\Nova\Fields\File  $field
      */
     protected static function configure(InteractsWithMediaInterface $field): InteractsWithMediaInterface
     {

@@ -12,18 +12,20 @@
     ],
     "require": {
         "php": "^8.5",
+        "mpietrucha/laravel-filterable": "^1.0",
+        "mpietrucha/laravel-package": "^1.0",
         "mpietrucha/utility": "^1.0",
         "spatie/laravel-medialibrary": "^11.17",
         "spatie/laravel-translatable": "^6.11"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "dev-main",
-        "illuminate/console": "^12.12",
-        "illuminate/support": "^12.12",
+        "larastan/larastan": "^3.8",
+        "laravel/framework": "^12.37",
         "laravel/nova": "^5.0",
         "laravel/nova-devtool": "^1.7",
         "mpietrucha/pint": "^1.0",
-        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan": "2.1.31",
         "symfony/var-dumper": "^7.2"
     },
     "repositories": [
@@ -36,6 +38,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
+            "Mpietrucha\\Analyze\\": "analyze/src",
             "Mpietrucha\\Nova\\": "src/"
         }
     },
@@ -49,7 +52,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Mpietrucha\\Nova\\ServiceProvider"
+                "Mpietrucha\\Nova\\Providers\\ServiceProvider"
             ]
         }
     },

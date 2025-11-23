@@ -12,6 +12,9 @@ use Mpietrucha\Utility\Concerns\Creatable;
 use Mpietrucha\Utility\Contracts\CreatableInterface;
 use Mpietrucha\Utility\Str;
 
+/**
+ * @phpstan-import-type RepeaterOutput from \Mpietrucha\Nova\Fields\Repeater\Contracts\TransformerInterface
+ */
 abstract class Transformer implements CreatableInterface, TransformerInterface
 {
     use Compatible, Creatable;
@@ -58,9 +61,6 @@ abstract class Transformer implements CreatableInterface, TransformerInterface
         return $key;
     }
 
-    /**
-     * @param  RepeatableTransformerInput  $input
-     */
     public function fill(Repeater $repeater, mixed $model, string $attribute, array $input): void
     {
         static::model($model);
@@ -71,12 +71,12 @@ abstract class Transformer implements CreatableInterface, TransformerInterface
     }
 
     /**
-     * @return RepeatableTransformerOutput
+     * @return RepeaterOutput
      */
     abstract protected function get(Model $model, string $attribute, Repeater $repeater): array;
 
     /**
-     * @param  RepeatableTransformerOutput  $output
+     * @param  RepeaterOutput  $output
      */
     abstract protected function set(Model $model, string $attribute, array $output, Repeater $repeater): void;
 

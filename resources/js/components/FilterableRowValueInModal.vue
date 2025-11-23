@@ -1,0 +1,87 @@
+<template>
+    <Modal :show="show" role="alertdialog" size="xl" @close-via-escape="close">
+        <div
+            class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden space-y-6"
+        >
+            <slot name="header">
+                <ModalHeader>
+                    {{ __('filterable.row.value.in.modal.header') }}
+                </ModalHeader>
+            </slot>
+
+            <slot name="content">
+                <ModalContent>
+                    <textarea
+                        v-model="value"
+                        rows="20"
+                        class="w-full h-auto py-3 block form-control form-input form-control-bordered"
+                    />
+
+                    <div class="mt-2 flex justify-between">
+                        <HelpText>
+                            {{ __('filterable.row.value.in.modal.help') }}
+                        </HelpText>
+
+                        <span class="text-xs font-semibold text-gray-400">
+                            {{ tc('filterable.row.value.in.items', count) }}
+                        </span>
+                    </div>
+                </ModalContent>
+            </slot>
+
+            <ModalFooter>
+                <div class="ml-auto">
+                    <Button
+                        @click="clear"
+                        variant="link"
+                        state="mellow"
+                        class="mr-3"
+                    >
+                        Clear
+                    </Button>
+
+                    <Button @click="close" state="default"> Save </Button>
+                </div>
+            </ModalFooter>
+        </div>
+    </Modal>
+</template>
+
+<script setup>
+    import { watch } from 'vue'
+    import useLocalization from '@/composables/useLocalization'
+    import { Button } from 'laravel-nova-ui'
+
+    defineProps({
+        show: {
+            type: Boolean,
+            default: false,
+        },
+    })
+
+    const emit = defineEmits(['close'])
+
+    const value = defineModel()
+
+    const count = defineModel('count')
+
+    const { tc } = useLocalization()
+
+    const close = () => emit('close')
+
+    const clear = () => {
+        value.value = ''
+
+        close()
+    }
+
+    watch(value, value => {
+        if (value.trim()) {
+            count.value = value.split(/\r?\n/).length
+
+            return
+        }
+
+        count.value = 0
+    })
+</script>

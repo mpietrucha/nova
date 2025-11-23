@@ -3,21 +3,28 @@
 namespace Mpietrucha\Nova\Fields\Translation;
 
 use Mpietrucha\Utility\Normalizer;
+use Mpietrucha\Utility\Type;
 
+/**
+ * @phpstan-import-type RepeaterInput from \Mpietrucha\Nova\Fields\Repeater\Encoder
+ * @phpstan-import-type RepeaterOutput from \Mpietrucha\Nova\Fields\Repeater\Encoder
+ */
 class Encoder extends \Mpietrucha\Nova\Fields\Repeater\Encoder
 {
     /**
-     * @param  RepeatableTransformerInputFrame  $translation
-     * @return RepeatableTransformerOutputFrame
+     * @param  RepeaterInput  $translation
+     * @return RepeaterOutput
      */
     public function __invoke(array $translation): array
     {
         $fields = static::fields($translation);
 
-        if (Select::property() |> $fields->has(...) |> Normalizer::not(...)) {
+        $key = Select::property() |> $fields->get(...);
+
+        if (Type::null($key)) {
             return [];
         }
 
-        return [Select::property() |> $fields->get(...) => Textarea::property() |> $fields->get(...) |> Normalizer::string(...)];
+        return [$key => Textarea::property() |> $fields->get(...) |> Normalizer::string(...)];
     }
 }

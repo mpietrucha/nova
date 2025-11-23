@@ -3,7 +3,7 @@
 namespace Mpietrucha\Nova\Fields\Translation;
 
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Mpietrucha\Nova\Concerns\InteractsWithTranslations;
+use Mpietrucha\Laravel\Package\Translations\Concerns\InteractsWithTranslations;
 use Mpietrucha\Utility\Utilizer\Concerns\Utilizable;
 use Mpietrucha\Utility\Utilizer\Contracts\UtilizableInterface;
 

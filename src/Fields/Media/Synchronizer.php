@@ -7,10 +7,13 @@ use Mpietrucha\Nova\Fields\Media\Synchronizer\Input;
 use Mpietrucha\Utility\Collection;
 use Mpietrucha\Utility\Enumerable\Contracts\EnumerableInterface;
 
+/**
+ * @phpstan-import-type RepeaterOutput from \Mpietrucha\Nova\Fields\Repeater\Transformer
+ */
 abstract class Synchronizer
 {
     /**
-     * @param  RepeatableTransformerOutput  $output
+     * @param  RepeaterOutput  $output
      */
     public static function synchronize(mixed $model, string $attribute, array $output, ?string $disk = null): void
     {
@@ -24,8 +27,8 @@ abstract class Synchronizer
     }
 
     /**
-     * @param  RepeatableTransformerOutput  $output
-     * @return \Mpietrucha\Utility\Enumerable\Contracts\EnumerableInterface<int, \Mpietrucha\Nova\Fields\Media\Adapter\Builder>
+     * @param  RepeaterOutput  $output
+     * @return \Mpietrucha\Utility\Enumerable\Contracts\EnumerableInterface<string, \Mpietrucha\Nova\Fields\Media\Adapter\Builder>
      */
     public static function get(Bucket $bucket, mixed $model, array $output): EnumerableInterface
     {

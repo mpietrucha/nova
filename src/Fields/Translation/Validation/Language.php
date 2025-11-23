@@ -5,7 +5,7 @@ namespace Mpietrucha\Nova\Fields\Translation\Validation;
 use Closure;
 use Illuminate\Contracts\Validation\DataAwareRule;
 use Illuminate\Contracts\Validation\ValidationRule;
-use Mpietrucha\Nova\Concerns\InteractsWithTranslations;
+use Mpietrucha\Laravel\Package\Translations\Concerns\InteractsWithTranslations;
 use Mpietrucha\Nova\Fields\Translation\Select;
 use Mpietrucha\Utility\Arr;
 use Mpietrucha\Utility\Collection;
@@ -15,17 +15,20 @@ use Mpietrucha\Utility\Enumerable\Contracts\EnumerableInterface;
 use Mpietrucha\Utility\Normalizer;
 use Mpietrucha\Utility\Str;
 
+/**
+ * @phpstan-import-type MixedArray from \Mpietrucha\Utility\Arr
+ */
 class Language implements CreatableInterface, DataAwareRule, ValidationRule
 {
     use Creatable, InteractsWithTranslations;
 
     /**
-     * @var array<array-key, mixed>
+     * @var MixedArray
      */
     protected array $data;
 
     /**
-     * @param  array<array-key, mixed>  $data
+     * @param  MixedArray  $data
      */
     public function setData(array $data): static
     {
@@ -75,7 +78,7 @@ class Language implements CreatableInterface, DataAwareRule, ValidationRule
     }
 
     /**
-     * @return array<array-key, mixed>
+     * @return MixedArray
      */
     protected function data(): array
     {

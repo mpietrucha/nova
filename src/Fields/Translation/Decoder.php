@@ -4,10 +4,14 @@ namespace Mpietrucha\Nova\Fields\Translation;
 
 use Mpietrucha\Utility\Str;
 
+/**
+ * @phpstan-import-type RepeaterFields from \Mpietrucha\Nova\Fields\Repeater\Decoder
+ * @phpstan-import-type RepeaterInput from \Mpietrucha\Nova\Fields\Repeater\Decoder
+ */
 class Decoder extends \Mpietrucha\Nova\Fields\Repeater\Decoder
 {
     /**
-     * @return RepeatableTransformerInputFrame
+     * @return RepeaterInput
      */
     public function __invoke(string $translation, string $language): array
     {
@@ -17,7 +21,7 @@ class Decoder extends \Mpietrucha\Nova\Fields\Repeater\Decoder
     }
 
     /**
-     * @return RepeatableTransformerInputFrameFields
+     * @return RepeaterFields
      */
     protected function fields(string $translation, string $language): array
     {
@@ -29,10 +33,6 @@ class Decoder extends \Mpietrucha\Nova\Fields\Repeater\Decoder
 
     protected static function language(string $language): ?string
     {
-        if (Str::isEmpty($language)) {
-            return null;
-        }
-
-        return $language;
+        return Str::nullWhenEmpty($language);
     }
 }

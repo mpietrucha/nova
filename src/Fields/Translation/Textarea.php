@@ -2,7 +2,7 @@
 
 namespace Mpietrucha\Nova\Fields\Translation;
 
-use Mpietrucha\Nova\Concerns\InteractsWithTranslations;
+use Mpietrucha\Laravel\Package\Translations\Concerns\InteractsWithTranslations;
 use Mpietrucha\Nova\Fields\Translation\Concerns\InteractsWithTranslation;
 use Mpietrucha\Nova\Fields\Translation\Contracts\InteractsWithTranslationInterface;
 

@@ -10,12 +10,14 @@ use Mpietrucha\Nova\Fields\Repeater;
 use Mpietrucha\Utility\Arr;
 
 /**
- * @phpstan-type TMedia \Mpietrucha\Nova\Fields\Media\Contracts\InteractsWithMediaInterface
+ * @phpstan-type MediaField \Mpietrucha\Nova\Fields\Media\Contracts\InteractsWithMediaInterface
+ *
+ * @phpstan-method static static make(string $name, list<MediaField> $fields)
  */
 class Collection extends Repeater
 {
     /**
-     * @param  list<TMedia>  $fields
+     * @param  list<MediaField>  $fields
      */
     public function __construct(string $name, array $fields)
     {
@@ -31,8 +33,8 @@ class Collection extends Repeater
     }
 
     /**
-     * @param  TMedia|list<TMedia>  $fields
-     * @return TMedia&\Laravel\Nova\Fields\File
+     * @param  MediaField|list<MediaField>  $fields
+     * @return MediaField&\Laravel\Nova\Fields\File
      */
     public static function field(array|InteractsWithMediaInterface $fields): InteractsWithMediaInterface
     {

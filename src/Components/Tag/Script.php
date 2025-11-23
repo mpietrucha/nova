@@ -2,18 +2,12 @@
 
 namespace Mpietrucha\Nova\Components\Tag;
 
-use Laravel\Nova\Script as Asset;
 use Mpietrucha\Nova\Components\Tag;
 use Mpietrucha\Utility\Enumerable\Contracts\EnumerableInterface;
 use Mpietrucha\Utility\Str;
 
 class Script extends Tag
 {
-    public function __construct(Asset $asset)
-    {
-        parent::__construct($asset);
-    }
-
     public function index(EnumerableInterface $lines): ?int
     {
         return $lines->filter->is('*<script src="*"></script>')->keys()->last();

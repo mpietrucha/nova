@@ -11,6 +11,9 @@ use Mpietrucha\Utility\Enumerable\Contracts\EnumerableInterface;
 use Mpietrucha\Utility\Normalizer;
 use Mpietrucha\Utility\Type;
 
+/**
+ * @phpstan-import-type EncoderFieldsCollection from \Mpietrucha\Nova\Fields\Media\Encoder
+ */
 class Input implements CreatableInterface
 {
     use Creatable;
@@ -20,7 +23,7 @@ class Input implements CreatableInterface
     }
 
     /**
-     * @param  RepeatableTransformerInputFrameFieldsCollection  $fields
+     * @param  EncoderFieldsCollection  $fields
      */
     public static function build(EnumerableInterface $fields): static
     {

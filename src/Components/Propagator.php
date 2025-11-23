@@ -34,8 +34,7 @@ class Propagator implements CreatableInterface
     {
         $path = Normalizer::string(null);
 
-        /** @phpstan-ignore match.unhandled */
-        match (true) {
+        match (true) { /** @phpstan-ignore match.unhandled */
             $this->style($asset) => Nova::style($asset, $path),
             $this->script($asset) => Nova::script($asset, $path),
         };

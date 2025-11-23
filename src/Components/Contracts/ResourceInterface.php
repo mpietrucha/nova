@@ -2,9 +2,9 @@
 
 namespace Mpietrucha\Nova\Components\Contracts;
 
-use Illuminate\Http\Request;
 use Mpietrucha\Utility\Contracts\CompatibleInterface;
 use Mpietrucha\Utility\Contracts\TappableInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 interface ResourceInterface extends CompatibleInterface, TappableInterface

@@ -4,6 +4,7 @@ namespace Mpietrucha\Nova\Components;
 
 use Mpietrucha\Nova\Components\Contracts\ResourceInterface;
 use Mpietrucha\Utility\Arr;
+use Mpietrucha\Utility\Collection;
 use Mpietrucha\Utility\Concerns\Compatible;
 use Mpietrucha\Utility\Concerns\Creatable;
 use Mpietrucha\Utility\Concerns\Tappable;
@@ -108,7 +109,9 @@ class Resource implements CreatableInterface, ResourceInterface
      */
     protected static function compatibility(Request $request, array $routes): bool
     {
-        if (Arr::isEmpty($routes)) {
+        $routes = Collection::create($routes);
+
+        if ($routes->isEmpty()) {
             return true;
         }
 
@@ -116,6 +119,10 @@ class Resource implements CreatableInterface, ResourceInterface
             return false;
         }
 
-        return $request->routeIs(...$routes) || $request->is(...$routes);
+        if ($request->is(...) |> $routes->pipeSpread(...)) {
+            return true;
+        }
+
+        return $request->routeIs(...) |> $routes->pipeSpread(...);
     }
 }

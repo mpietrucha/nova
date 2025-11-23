@@ -53,8 +53,7 @@ class Synchronizer extends Propagator
 
     public function tag(Asset $asset): TagInterface
     {
-        /** @phpstan-ignore-next-line match.unhandled */
-        return match (true) {
+        return match (true) {  /** @phpstan-ignore match.unhandled */
             $this->style($asset) => Style::create($asset),
             $this->script($asset) => Script::create($asset),
         };

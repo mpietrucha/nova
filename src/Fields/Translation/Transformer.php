@@ -11,7 +11,7 @@ use Mpietrucha\Utility\Instance;
 use Spatie\Translatable\HasTranslations;
 
 /**
- * @phpstan-type TModel \Illuminate\Database\Eloquent\Model&\Mpietrucha\Nova\Fields\Translation\Contracts\InteractsWithTranslationsInterface
+ * @phpstan-type Translation \Illuminate\Database\Eloquent\Model&\Mpietrucha\Nova\Fields\Translation\Contracts\InteractsWithTranslationsInterface
  */
 class Transformer extends \Mpietrucha\Nova\Fields\Repeater\Transformer implements InteractsWithRequestInterface
 {
@@ -35,7 +35,7 @@ class Transformer extends \Mpietrucha\Nova\Fields\Repeater\Transformer implement
     }
 
     /**
-     * @param  TModel  $model
+     * @param  Translation  $model
      */
     protected function get(Model $model, string $attribute, Repeater $repeater): array
     {
@@ -49,7 +49,7 @@ class Transformer extends \Mpietrucha\Nova\Fields\Repeater\Transformer implement
     }
 
     /**
-     * @param  TModel  $model
+     * @param  Translation  $model
      */
     protected function set(Model $model, string $attribute, array $output, Repeater $repeater): void
     {

@@ -2,10 +2,14 @@
 
 namespace Mpietrucha\Nova\Fields\Media;
 
+/**
+ * @phpstan-import-type RepeaterFields from \Mpietrucha\Nova\Fields\Repeater\Decoder
+ * @phpstan-import-type RepeaterInput from \Mpietrucha\Nova\Fields\Repeater\Decoder
+ */
 class Decoder extends \Mpietrucha\Nova\Fields\Repeater\Decoder
 {
     /**
-     * @return RepeatableTransformerInputFrame
+     * @return RepeaterInput
      */
     public function __invoke(string $path, int $index): array
     {
@@ -15,7 +19,7 @@ class Decoder extends \Mpietrucha\Nova\Fields\Repeater\Decoder
     }
 
     /**
-     * @return RepeatableTransformerInputFrameFields
+     * @return RepeaterFields
      */
     protected function fields(string $path, int $index): array
     {

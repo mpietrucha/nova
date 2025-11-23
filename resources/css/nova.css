@@ -1,0 +1,50 @@
+@tailwind utilities;
+
+div[data-repeater]
+    > div:first-child:has(> label span.text-red-500)
+    + div
+    div[data-repeater-id][data-repeater]:first-of-type
+    div[dusk="row-delete-button"] {
+    @apply hidden;
+}
+
+div[data-repeater]
+    > div:first-child:has(> label span.text-red-500)
+    + div
+    div[data-repeater-id][data-repeater]:first-of-type
+    > div:first-child:not(
+        :has([dusk="row-move-up-button"], [dusk="row-move-down-button"])
+    ) {
+    @apply hidden;
+}
+
+div[data-repeater]
+    > div:first-child:has(> label span.text-red-500)
+    + div
+    div[data-repeater-id][data-repeater]:first-of-type
+    > div:first-child:not(
+        :has([dusk="row-move-up-button"], [dusk="row-move-down-button"])
+    )
+    + div {
+    @apply border-t-0;
+}
+
+div:has(> [dusk$="-repeater-row"]) + div {
+    @apply !mt-4;
+}
+
+div[dusk$="-repeater-row"]
+    > div:last-of-type
+    > div
+    > div:first-of-type
+    > div:last-of-type {
+    @apply w-full;
+}
+
+div[dusk$="-repeater-row"][data-repeater]
+    > div:last-of-type
+    > div
+    > div:first-of-type
+    > div:first-of-type {
+    @apply hidden;
+}

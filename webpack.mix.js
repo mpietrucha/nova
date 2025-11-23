@@ -5,11 +5,12 @@ let NovaExtension = require('laravel-nova-devtool')
 mix.extend('nova', new NovaExtension())
 
 mix.setPublicPath('dist')
-    .js('resources/js/asset.js', 'js')
+    .js('resources/js/nova.js', 'js')
     .vue({ version: 3 })
-    .css('resources/css/asset.css', 'css')
+    .css('resources/css/nova.css', 'css')
     .alias({
         '@': path.join(__dirname, 'resources/js/'),
+        '@nova': path.resolve(__dirname, 'vendor/laravel/nova/resources/js'),
     })
     .nova('mpietrucha/nova')
     .version()

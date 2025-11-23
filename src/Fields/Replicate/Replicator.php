@@ -2,43 +2,19 @@
 
 namespace Mpietrucha\Nova\Fields\Replicate;
 
-use Closure;
-use Mpietrucha\Nova\Concerns\InteractsWithReflection;
-use Mpietrucha\Nova\Contracts\InteractsWithReflectionInterface;
+use Mpietrucha\Nova\Fields\Delegate\Delegator;
 use Mpietrucha\Nova\Fields\Replicate\Contracts\ThrowableReplicateInterface;
-use Mpietrucha\Utility\Concerns\Creatable;
-use Mpietrucha\Utility\Contracts\CreatableInterface;
-use Mpietrucha\Utility\Value;
+use Mpietrucha\Utility\Arr;
 
-class Replicator implements CreatableInterface, InteractsWithReflectionInterface
+class Replicator extends Delegator
 {
-    use Creatable, InteractsWithReflection;
-
     public function throwable(): bool
     {
         return $this->field() instanceof ThrowableReplicateInterface;
     }
 
-    public function supported(string $method): bool
+    public function replicate(mixed $value, string $method): void
     {
-        return $this->reflection()->hasMethod($method);
-    }
-
-    public function call(mixed $value, string $method): void
-    {
-        if ($this->unsupported($method)) {
-            return;
-        }
-
-        $closure = $this->closure($method);
-
-        $attempt = Value::attempt($closure)->get($value);
-
-        $attempt->failed() && $this->throwable() && $attempt->throwable()->throw();
-    }
-
-    protected function closure(string $method): Closure
-    {
-        return $this->field() |> $this->reflection()->getMethod($method)->getClosure(...);
+        $this->delegate($method, Arr::overlap($value));
     }
 }

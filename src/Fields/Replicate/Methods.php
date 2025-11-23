@@ -11,20 +11,20 @@ use Mpietrucha\Utility\Type;
 class Methods
 {
     /**
-     * @param  \Mpietrucha\Utility\Enumerable\Contracts\EnumerableInterface<string, string>|array<string, string>  $methods
+     * @param  iterable<string, string>  $methods
      */
-    public static function call(Field $source, array|EnumerableInterface $methods): void
+    public static function call(Field $source, iterable $methods): void
     {
         $replicator = Replicator::create($source);
 
-        $replicator->call(...) |> static::build($replicator, $methods)->each(...);
+        $replicator->replicate(...) |> static::build($replicator, $methods)->each(...);
     }
 
     /**
-     * @param  \Mpietrucha\Utility\Enumerable\Contracts\EnumerableInterface<string, string>|array<string, string>  $methods
+     * @param  iterable<string, string>  $methods
      * @return \Mpietrucha\Utility\Enumerable\Contracts\EnumerableInterface<string, string>
      */
-    protected static function build(Replicator $replicator, array|EnumerableInterface $methods): EnumerableInterface
+    protected static function build(Replicator $replicator, iterable $methods): EnumerableInterface
     {
         $methods = Collection::bind($methods);
 

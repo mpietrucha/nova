@@ -3,13 +3,16 @@
 namespace Mpietrucha\Nova\Cards;
 
 use Laravel\Nova\Card;
-use Mpietrucha\Nova\Cards\Filterable\Concerns\InteractsWithConditions;
-use Mpietrucha\Nova\Cards\Filterable\Concerns\InteractsWithInput;
-use Mpietrucha\Nova\Cards\Filterable\Contracts\ConditionInterface;
-use Mpietrucha\Nova\Cards\Filterable\Contracts\FilterableInterface;
+use Mpietrucha\Laravel\Filterable\Concerns\InteractsWithConditions;
+use Mpietrucha\Laravel\Filterable\Concerns\InteractsWithInput;
+use Mpietrucha\Laravel\Filterable\Contracts\ConditionInterface;
+use Mpietrucha\Laravel\Filterable\Contracts\InteractsWithInputInterface;
 use Mpietrucha\Utility\Enumerable\Contracts\EnumerableInterface;
 
-class Filterable extends Card implements FilterableInterface
+/**
+ * @method static make(mixed $input)
+ */
+class Filterable extends Card implements InteractsWithInputInterface
 {
     use InteractsWithConditions, InteractsWithInput;
 
@@ -19,25 +22,32 @@ class Filterable extends Card implements FilterableInterface
     public $width = self::FULL_WIDTH;
 
     /**
-     * @var \Mpietrucha\Utility\Enumerable\Contracts\EnumerableInterface<int, \Mpietrucha\Nova\Cards\Filterable\Contracts\ConditionInterface>
+     * @var string
      */
-    protected ?EnumerableInterface $conditions = null;
+    public $height = self::DYNAMIC_HEIGHT;
+
+    public function __construct(mixed $input)
+    {
+        $this->use($input);
+    }
 
     public function component(): string
     {
         return 'mpietrucha-filterable';
     }
 
-    final public function conditions(): EnumerableInterface
+    /**
+     * @return \Mpietrucha\Utility\Enumerable\Contracts\EnumerableInterface<int, \Mpietrucha\Laravel\Filterable\Contracts\ConditionInterface>
+     */
+    public function conditions(): EnumerableInterface
     {
-        return $this->conditions ??= $this->input()->ensure(ConditionInterface::class);
+        return $this->input()->ensure(ConditionInterface::class);
     }
 
     public function jsonSerialize(): array
     {
         return [
-            ...parent::jsonSerialize(),
             'conditions' => $this->conditions()->map->jsonSerialize()->all(),
-        ];
+        ] + parent::jsonSerialize();
     }
 }

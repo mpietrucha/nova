@@ -7,7 +7,7 @@ use Mpietrucha\Nova\Fields\Media\Contracts\InteractsWithMediaInterface;
 use Mpietrucha\Nova\Fields\Repeater;
 
 /**
- * @phpstan-type TModel \Illuminate\Database\Eloquent\Model&\Spatie\MediaLibrary\HasMedia
+ * @phpstan-type MediaModel \Illuminate\Database\Eloquent\Model&\Spatie\MediaLibrary\HasMedia
  */
 class Transformer extends \Mpietrucha\Nova\Fields\Repeater\Transformer
 {
@@ -31,7 +31,7 @@ class Transformer extends \Mpietrucha\Nova\Fields\Repeater\Transformer
     }
 
     /**
-     * @param  TModel  $model
+     * @param  MediaModel  $model
      */
     protected function get(Model $model, string $attribute, Repeater $repeater): array
     {
@@ -41,7 +41,7 @@ class Transformer extends \Mpietrucha\Nova\Fields\Repeater\Transformer
     }
 
     /**
-     * @param  TModel  $model
+     * @param  MediaModel  $model
      */
     protected function set(Model $model, string $attribute, array $output, Repeater $repeater): void
     {

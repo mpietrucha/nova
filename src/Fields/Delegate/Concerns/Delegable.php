@@ -8,12 +8,14 @@ use Mpietrucha\Nova\Fields\Delegate\Delegator;
  * @mixin \Laravel\Nova\Fields\Field
  *
  * @phpstan-require-extends \Laravel\Nova\Fields\Field
+ *
+ * @phpstan-import-type MixedArray from \Mpietrucha\Utility\Arr
  */
 trait Delegable
 {
     /**
      * @param  string  $method
-     * @param  array<array-key, mixed>  $arguments
+     * @param  MixedArray  $arguments
      */
     public function __call($method, $arguments): static
     {

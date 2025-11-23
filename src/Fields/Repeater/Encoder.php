@@ -9,13 +9,19 @@ use Mpietrucha\Utility\Concerns\Creatable;
 use Mpietrucha\Utility\Contracts\CreatableInterface;
 use Mpietrucha\Utility\Enumerable\Contracts\EnumerableInterface;
 
+/**
+ * @phpstan-import-type RepeaterInput from \Mpietrucha\Nova\Fields\Repeater\Contracts\TransformerInterface
+ * @phpstan-import-type RepeaterOutput from \Mpietrucha\Nova\Fields\Repeater\Contracts\TransformerInterface
+ *
+ * @phpstan-type EncoderFieldsCollection  \Mpietrucha\Utility\Enumerable\Contracts\EnumerableInterface<string, mixed>
+ */
 abstract class Encoder implements CreatableInterface
 {
     use Creatable;
 
     /**
-     * @param  RepeatableTransformerInputFrame  $frame
-     * @return RepeatableTransformerInputFrameFieldsCollection
+     * @param  RepeaterInput  $frame
+     * @return EncoderFieldsCollection
      */
     protected static function fields(array $frame): EnumerableInterface
     {

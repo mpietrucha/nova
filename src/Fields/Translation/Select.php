@@ -3,8 +3,8 @@
 namespace Mpietrucha\Nova\Fields\Translation;
 
 use Illuminate\Validation\Rule;
+use Mpietrucha\Laravel\Package\Translations\Concerns\InteractsWithTranslations;
 use Mpietrucha\Nova\Concerns\InteractsWithRequest;
-use Mpietrucha\Nova\Concerns\InteractsWithTranslations;
 use Mpietrucha\Nova\Contracts\InteractsWithRequestInterface;
 use Mpietrucha\Nova\Fields\Translation\Concerns\InteractsWithTranslation;
 use Mpietrucha\Nova\Fields\Translation\Contracts\InteractsWithTranslationInterface;
