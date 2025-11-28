@@ -6,9 +6,7 @@
                 'border-b border-gray-100 dark:border-gray-700': rows.length,
             }"
         >
-            <div
-                class="uppercase text-gray-500 text-xs tracking-wide whitespace-nowrap"
-            >
+            <div class="uppercase text-gray-500 text-xs tracking-wide whitespace-nowrap">
                 {{ group }}
             </div>
 
@@ -25,16 +23,16 @@
                 v-model:filter="row.filter"
                 :key="row.id"
                 :conditions="conditions"
-                @delete="removeRow(row)"
+                @delete="deleteRow(row)"
             />
         </div>
     </Card>
 </template>
 
 <script setup>
-    import useRows from '@/composables/useRows'
-    import FilterableRow from './FilterableRow'
+    import useFilterableRows from '@/composables/useFilterableRows'
     import FilterableGroupButton from './FilterableGroupButton'
+    import FilterableRow from './FilterableRow'
 
     defineProps({
         group: {
@@ -49,5 +47,5 @@
 
     const rows = defineModel()
 
-    const { addRow, removeRow } = useRows(rows)
+    const { addRow, deleteRow } = useFilterableRows(rows)
 </script>

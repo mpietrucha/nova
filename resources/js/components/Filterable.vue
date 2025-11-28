@@ -1,10 +1,8 @@
 <template>
     <div class="mpietrucha-nova">
-        <h1 class="font-normal text-xl mb-3 flex items-center">
-            {{ __('filterable.filters') }}
-        </h1>
+        <FilterableHeader />
 
-        <FilterableDefault v-if="rows.length === 0" @add="addRow()" />
+        <FilterableGroupPlaceholder v-if="rows.length === 0" @add="addRow()" />
 
         <template v-else>
             <FilterableGroup
@@ -20,20 +18,24 @@
                 :group="__('filterable.group.or')"
                 :conditions="conditions"
             />
+
+            <FilterableFooter @clear="clearRows()" />
         </template>
     </div>
 </template>
 
 <script setup>
-    import useRows from '@/composables/useRows'
-    import useGroups from '@/composables/useGroups'
+    import useFilterableGroups from '@/composables/useFilterableGroups'
+    import useFilterableRows from '@/composables/useFilterableRows'
     import { computed, watch } from 'vue'
+    import FilterableFooter from './FilterableFooter'
     import FilterableGroup from './FilterableGroup'
-    import FilterableDefault from './FilterableDefault'
+    import FilterableGroupPlaceholder from './FilterableGroupPlaceholder'
+    import FilterableHeader from './FilterableHeader'
 
-    const { rows, addRow } = useRows()
+    const { rows, clearRows, addRow } = useFilterableRows()
 
-    const { groups, addGroup, removeGroup } = useGroups()
+    const { groups, addGroup, deleteGroup } = useFilterableGroups()
 
     const props = defineProps(['card'])
 
@@ -45,7 +47,7 @@
         }
 
         groups.value.forEach(group => {
-            group.rows.forEach(row => group.removeRow(row))
+            group.rows.forEach(row => group.deleteRow(row))
         })
     })
 
@@ -55,12 +57,12 @@
             groups.forEach((group, i) => {
                 const next = groups[i + 1]
 
-                if (group.rows.length === 0 && next) {
-                    removeGroup(next)
-                }
-
                 if (group.rows.length && next === undefined) {
                     addGroup()
+                }
+
+                if (group.rows.length === 0 && next !== undefined) {
+                    deleteGroup(next)
                 }
             })
         },

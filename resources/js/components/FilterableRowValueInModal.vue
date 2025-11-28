@@ -1,8 +1,6 @@
 <template>
-    <Modal :show="show" role="alertdialog" size="xl" @close-via-escape="close">
-        <div
-            class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden space-y-6"
-        >
+    <Modal :show="show" role="dialog" size="xl" @close-via-escape="close">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden space-y-6">
             <slot name="header">
                 <ModalHeader>
                     {{ __('filterable.row.value.in.modal.header') }}
@@ -29,28 +27,23 @@
                 </ModalContent>
             </slot>
 
-            <ModalFooter>
-                <div class="ml-auto">
-                    <Button
-                        @click="clear"
-                        variant="link"
-                        state="mellow"
-                        class="mr-3"
-                    >
-                        Clear
-                    </Button>
+            <ModalFooter class="space-x-3 justify-end">
+                <Button @click="clear()" variant="link" state="mellow">
+                    {{ __('filterable.row.value.in.modal.clear') }}
+                </Button>
 
-                    <Button @click="close" state="default"> Save </Button>
-                </div>
+                <Button @click="close()">
+                    {{ __('filterable.row.value.in.modal.save') }}
+                </Button>
             </ModalFooter>
         </div>
     </Modal>
 </template>
 
 <script setup>
-    import { watch } from 'vue'
     import useLocalization from '@/composables/useLocalization'
     import { Button } from 'laravel-nova-ui'
+    import { watch } from 'vue'
 
     defineProps({
         show: {
@@ -70,18 +63,22 @@
     const close = () => emit('close')
 
     const clear = () => {
-        value.value = ''
+        value.value = undefined
 
         close()
     }
 
-    watch(value, value => {
-        if (value.trim()) {
-            count.value = value.split(/\r?\n/).length
+    watch(
+        value,
+        value => {
+            if (value?.trim()) {
+                count.value = value.split(/\r?\n/).length
 
-            return
-        }
+                return
+            }
 
-        count.value = 0
-    })
+            count.value = 0
+        },
+        { immediate: true },
+    )
 </script>

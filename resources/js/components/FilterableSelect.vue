@@ -1,9 +1,5 @@
 <template>
-    <SearchInput
-        :options="options"
-        @input="search = $event"
-        @selected="value = $event"
-    >
+    <SearchInput :options="options" @input="search = $event" @selected="value = $event">
         <template #default>
             <div v-if="value" class="flex items-center">
                 {{ value.name }}
@@ -22,9 +18,7 @@
 </template>
 
 <script setup>
-    import { ref, computed, onMounted } from 'vue'
-
-    const value = defineModel()
+    import { computed, onMounted, ref } from 'vue'
 
     const props = defineProps({
         options: {
@@ -33,21 +27,23 @@
         },
     })
 
+    const value = defineModel()
+
     const search = ref('')
 
     const options = computed(() => {
         return props.options.filter(option => {
-            return option.name
-                .toLowerCase()
-                .includes(search.value.toLowerCase())
+            return option.name.toLowerCase().includes(search.value.toLowerCase())
         })
     })
 
     onMounted(() => {
-        if (value.value || options.value.length === 0) {
+        const [option] = options.value
+
+        if (value.value || option === undefined) {
             return
         }
 
-        value.value = options.value[0]
+        value.value = option
     })
 </script>

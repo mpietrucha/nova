@@ -10,10 +10,14 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000"
     },
     "devDependencies": {
+        "@mpietrucha/postcss-tailwind-deduplicate": "^1.0.1",
         "@mpietrucha/prettier": "^1.0.6",
+        "@vueuse/core": "^14.1.0",
         "autoprefixer": "^10.4.21",
         "laravel-nova-devtool": "file:vendor/laravel/nova-devtool",
         "postcss": "^8.5.6",
-        "tailwindcss": "^3.4.18"
+        "postcss-rtlcss": "^5.7.1",
+        "tailwindcss": "^3.4.18",
+        "vue-tsc": "^3.1.5"
     }
 }

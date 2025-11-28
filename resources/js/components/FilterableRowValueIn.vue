@@ -1,7 +1,5 @@
 <template>
-    <div
-        class="w-full flex form-control form-input form-control-bordered form-select p-2"
-    >
+    <div class="w-full flex form-control form-input form-control-bordered form-select p-2">
         <InvertedButton
             :iconType="count ? 'arrow-right-circle' : 'plus-circle'"
             @click="modal = true"
@@ -25,8 +23,8 @@
 </template>
 
 <script setup>
-    import { ref } from 'vue'
     import useLocalization from '@/composables/useLocalization'
+    import { ref } from 'vue'
     import FilterableRowValueInModal from './FilterableRowValueInModal'
 
     const modal = ref(false)

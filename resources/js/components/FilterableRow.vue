@@ -2,16 +2,9 @@
     <div class="pt-3 px-3">
         <div class="flex space-x-3">
             <div class="flex w-full">
-                <FilterableRowCondition
-                    v-model="condition"
-                    :conditions="conditions"
-                />
+                <FilterableRowCondition v-model="condition" :conditions="conditions" />
 
-                <FilterableRowFilter
-                    v-if="filters"
-                    v-model="filter"
-                    :filters="filters"
-                />
+                <FilterableRowFilter v-if="filters" v-model="filter" :filters="filters" />
 
                 <FilterableRowValue
                     v-if="filter"
@@ -34,11 +27,11 @@
 </template>
 
 <script setup>
-    import { ref, computed } from 'vue'
-    import FilterableRowValue from './FilterableRowValue'
-    import FilterableRowFilter from './FilterableRowFilter'
+    import { computed, ref } from 'vue'
     import FilterableGroupButton from './FilterableGroupButton'
     import FilterableRowCondition from './FilterableRowCondition'
+    import FilterableRowFilter from './FilterableRowFilter'
+    import FilterableRowValue from './FilterableRowValue'
 
     defineProps({
         conditions: {

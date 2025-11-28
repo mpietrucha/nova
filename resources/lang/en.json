@@ -3,9 +3,13 @@
     "filterable.group.and": "And",
     "filterable.group.or": "Or",
     "filterable.add_new_condition": "Add a new condition",
+    "filterable.footer.clear": "Clear",
+    "filterable.footer.filter": "Filter",
     "filterable.row.value.in.edit": "Edit",
     "filterable.row.value.in.items": "No items|1 item|:count items",
     "filterable.row.value.in.add_items": "Add items",
     "filterable.row.value.in.modal.header": "Add items you want to filter",
-    "filterable.row.value.in.modal.help": "One item per line"
+    "filterable.row.value.in.modal.help": "One item per line",
+    "filterable.row.value.in.modal.clear": "Clear",
+    "filterable.row.value.in.modal.save": "Save"
 }
