@@ -1,7 +1,7 @@
+import useFilterableRows, { createRows } from '@/composables/useFilterableRows'
+import useFilterableStorage from '@/composables/useFilterableStorage'
 import { toRef } from '@vueuse/core'
 import { uid } from 'uid/single'
-import useFilterableRows, { createRows } from './useFilterableRows'
-import useFilterableStorage from './useFilterableStorage'
 
 export const createGroup = ({ id = uid(), rows } = {}) => {
     return {
@@ -14,10 +14,14 @@ export const createGroups = group => {
     return [createGroup(group)]
 }
 
-export const useFilterableGroupsStorage = () => {
-    const groups = useFilterableStorage(() => createGroups(), {
+export const useGroups = () => {
+    return useFilterableStorage(createGroups, {
         name: 'groups',
     })
+}
+
+export const useHydratedGroups = () => {
+    const groups = useGroups()
 
     groups.value = groups.value.map(group => createGroup(group))
 
@@ -25,7 +29,7 @@ export const useFilterableGroupsStorage = () => {
 }
 
 export default data => {
-    const groups = toRef(data || useFilterableGroupsStorage())
+    const groups = toRef(data || useHydratedGroups())
 
     const clearGroups = () => {
         groups.value = createGroups()

@@ -27,11 +27,11 @@
 </template>
 
 <script setup>
-    import { computed, ref } from 'vue'
-    import FilterableGroupButton from './FilterableGroupButton'
-    import FilterableRowCondition from './FilterableRowCondition'
-    import FilterableRowFilter from './FilterableRowFilter'
-    import FilterableRowValue from './FilterableRowValue'
+    import FilterableGroupButton from '@/components/FilterableGroupButton'
+    import FilterableRowCondition from '@/components/FilterableRowCondition'
+    import FilterableRowFilter from '@/components/FilterableRowFilter'
+    import FilterableRowValue from '@/components/FilterableRowValue'
+    import { computed } from 'vue'
 
     defineProps({
         conditions: {
@@ -40,10 +40,9 @@
         },
     })
 
-    const condition = ref()
-
+    const value = defineModel('value')
     const filter = defineModel('filter')
-    const value = defineModel()
+    const condition = defineModel('condition')
 
     const filters = computed(() => condition.value?.filters)
 </script>

@@ -6,7 +6,7 @@
             {{ __('filterable.footer.clear') }}
         </Button>
 
-        <Button @click="$emit('submit')">
+        <Button type="submit">
             {{ __('filterable.footer.filter') }}
         </Button>
     </div>

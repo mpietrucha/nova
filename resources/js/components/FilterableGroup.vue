@@ -19,8 +19,9 @@
         >
             <FilterableRow
                 v-for="row in rows"
-                v-model="row.value"
+                v-model:value="row.value"
                 v-model:filter="row.filter"
+                v-model:condition="row.condition"
                 :key="row.id"
                 :conditions="conditions"
                 @delete="deleteRow(row)"
@@ -30,9 +31,9 @@
 </template>
 
 <script setup>
-    import useFilterableRows from '@/composables/useFilterableRows'
-    import FilterableGroupButton from './FilterableGroupButton'
-    import FilterableRow from './FilterableRow'
+    import FilterableGroupButton from '@/components/FilterableGroupButton'
+    import FilterableRow from '@/components/FilterableRow'
+    import useFilterable from '@/composables/useFilterable'
 
     defineProps({
         group: {
@@ -47,5 +48,5 @@
 
     const rows = defineModel()
 
-    const { addRow, deleteRow } = useFilterableRows(rows)
+    const { addRow, deleteRow } = useFilterable({ rows })
 </script>

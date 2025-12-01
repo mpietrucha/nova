@@ -1,4 +1,4 @@
-import Filterable from '@/components/Filterable'
+import { getFilterableComponent, getFilterableName } from '@/composables/useFilterable'
 
 Nova.mp = {
     attributes: component => {
@@ -45,7 +45,7 @@ Nova.mp = {
 }
 
 Nova.booting((Vue, router, store) => {
-    Vue.component('mpietrucha-filterable', Filterable)
+    Vue.component(getFilterableName(), getFilterableComponent())
 
     Vue.mixin({
         mounted() {

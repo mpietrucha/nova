@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-    import FilterableSelect from './FilterableSelect'
+    import FilterableSelect from '@/components/FilterableSelect'
 
     defineProps({
         conditions: {

@@ -1,16 +1,25 @@
+import { getFilterableName } from '@/composables/useFilterable'
 import { useLocalStorage } from '@vueuse/core'
 
-export const useDefaultStorageValue = value => {
-    return typeof value === 'function' ? value() : value
-}
+const storage = new Map()
 
-export const createStorageKey = name => {
-    return ['mpietrucha', 'filterable', window.location.pathname.split('/'), name]
+export const createStorageKey = ({ name } = {}) => {
+    return [getFilterableName().split('-'), window.location.pathname.split('/'), name]
         .flat()
         .filter(Boolean)
         .join('.')
 }
 
-export default (value, { name } = {}) => {
-    return useLocalStorage(createStorageKey(name), useDefaultStorageValue(value))
+export default (initial, options = {}) => {
+    const key = createStorageKey(options)
+
+    if (storage.has(key)) {
+        return storage.get(key)
+    }
+
+    const value = useLocalStorage(key, initial)
+
+    storage.set(key, value)
+
+    return value
 }

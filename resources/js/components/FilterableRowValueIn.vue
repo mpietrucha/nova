@@ -15,7 +15,7 @@
     </div>
 
     <FilterableRowValueInModal
-        v-model="value"
+        v-model:value="value"
         v-model:count="count"
         :show="modal"
         @close="modal = false"
@@ -23,9 +23,9 @@
 </template>
 
 <script setup>
+    import FilterableRowValueInModal from '@/components/FilterableRowValueInModal'
     import useLocalization from '@/composables/useLocalization'
     import { ref } from 'vue'
-    import FilterableRowValueInModal from './FilterableRowValueInModal'
 
     const modal = ref(false)
 

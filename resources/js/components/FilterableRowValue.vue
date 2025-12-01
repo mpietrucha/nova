@@ -12,8 +12,8 @@
 </template>
 
 <script setup>
+    import FilterableRowValueIn from '@/components/FilterableRowValueIn'
     import { computed } from 'vue'
-    import FilterableRowValueIn from './FilterableRowValueIn'
 
     const props = defineProps({
         filter: {

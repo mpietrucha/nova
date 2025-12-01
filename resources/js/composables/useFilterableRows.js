@@ -1,6 +1,6 @@
+import useFilterableStorage from '@/composables/useFilterableStorage'
 import { toRef } from '@vueuse/core'
 import { uid } from 'uid/single'
-import useFilterableStorage from './useFilterableStorage'
 
 export const createRow = () => {
     return {
@@ -12,14 +12,14 @@ export const createRows = () => {
     return []
 }
 
-export const useFilterableRowsStorage = () => {
-    return useFilterableStorage(() => createRows(), {
+export const useRows = () => {
+    return useFilterableStorage(createRow, {
         name: 'rows',
     })
 }
 
 export default data => {
-    const rows = toRef(data || useFilterableRowsStorage())
+    const rows = toRef(data || useRows())
 
     const clearRows = () => {
         rows.value = createRows()

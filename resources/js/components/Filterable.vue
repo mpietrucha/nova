@@ -4,7 +4,7 @@
 
         <FilterableGroupPlaceholder v-if="rows.length === 0" @add="addRow()" />
 
-        <template v-else>
+        <form v-else @submit.prevent="submit()">
             <FilterableGroup
                 v-model="rows"
                 :group="__('filterable.group.and')"
@@ -20,22 +20,19 @@
             />
 
             <FilterableFooter @clear="clearRows()" />
-        </template>
+        </form>
     </div>
 </template>
 
 <script setup>
-    import useFilterableGroups from '@/composables/useFilterableGroups'
-    import useFilterableRows from '@/composables/useFilterableRows'
+    import FilterableFooter from '@/components/FilterableFooter'
+    import FilterableGroup from '@/components/FilterableGroup'
+    import FilterableGroupPlaceholder from '@/components/FilterableGroupPlaceholder'
+    import FilterableHeader from '@/components/FilterableHeader'
+    import useFilterable from '@/composables/useFilterable'
     import { computed, watch } from 'vue'
-    import FilterableFooter from './FilterableFooter'
-    import FilterableGroup from './FilterableGroup'
-    import FilterableGroupPlaceholder from './FilterableGroupPlaceholder'
-    import FilterableHeader from './FilterableHeader'
 
-    const { rows, clearRows, addRow } = useFilterableRows()
-
-    const { groups, addGroup, deleteGroup } = useFilterableGroups()
+    const { submit, rows, clearRows, addRow, groups, addGroup, deleteGroup } = useFilterable()
 
     const props = defineProps(['card'])
 
@@ -49,6 +46,8 @@
         groups.value.forEach(group => {
             group.rows.forEach(row => group.deleteRow(row))
         })
+
+        submit()
     })
 
     watch(

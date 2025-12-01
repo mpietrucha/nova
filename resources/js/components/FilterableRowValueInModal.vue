@@ -54,8 +54,7 @@
 
     const emit = defineEmits(['close'])
 
-    const value = defineModel()
-
+    const value = defineModel('value')
     const count = defineModel('count')
 
     const { tc } = useLocalization()
@@ -63,21 +62,14 @@
     const close = () => emit('close')
 
     const clear = () => {
-        value.value = undefined
-
         close()
+        value.value = undefined
     }
 
     watch(
         value,
         value => {
-            if (value?.trim()) {
-                count.value = value.split(/\r?\n/).length
-
-                return
-            }
-
-            count.value = 0
+            count.value = (value?.split(/\r?\n/) ?? []).length
         },
         { immediate: true },
     )
