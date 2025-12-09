@@ -38,8 +38,12 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Mpietrucha\\Analyze\\": "analyze/src",
             "Mpietrucha\\Nova\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mpietrucha\\Analyze\\": "analyze/src/"
         }
     },
     "config": {

@@ -26,8 +26,8 @@ export const createRequestRow = row => {
     }
 
     return {
-        condition: row.condition.attribute,
-        filter: row.filter.attribute,
+        property: row.property.attribute,
+        filter: row.filter.identity,
         value: row.value,
     }
 }

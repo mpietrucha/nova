@@ -6,9 +6,6 @@
     import { Button } from 'laravel-nova-ui'
 
     defineProps({
-        icon: {
-            type: String,
-            default: 'plus-circle',
-        },
+        icon: { type: String, default: 'plus-circle' },
     })
 </script>

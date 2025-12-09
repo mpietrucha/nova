@@ -17,6 +17,7 @@
                 class="mt-3"
                 :group="__('filterable.group.or')"
                 :conditions="conditions"
+                :key="group.id"
             />
 
             <FilterableFooter @clear="clearRows()" />
@@ -34,7 +35,9 @@
 
     const { submit, rows, clearRows, addRow, groups, addGroup, deleteGroup } = useFilterable()
 
-    const props = defineProps(['card'])
+    const props = defineProps({
+        card: { type: Object, required: true },
+    })
 
     const conditions = computed(() => props.card.conditions)
 

@@ -8,10 +8,7 @@
     import FilterableSelect from '@/components/FilterableSelect'
 
     defineProps({
-        filters: {
-            type: Array,
-            required: true,
-        },
+        filters: { type: Array, required: true },
     })
 
     const value = defineModel()

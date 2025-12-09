@@ -44,7 +44,7 @@ Nova.mp = {
     },
 }
 
-Nova.booting((Vue, router, store) => {
+Nova.booting(Vue => {
     Vue.component(getFilterableName(), getFilterableComponent())
 
     Vue.mixin({

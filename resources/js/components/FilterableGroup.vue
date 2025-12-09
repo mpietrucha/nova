@@ -19,9 +19,9 @@
         >
             <FilterableRow
                 v-for="row in rows"
-                v-model:value="row.value"
+                v-model:property="row.property"
                 v-model:filter="row.filter"
-                v-model:condition="row.condition"
+                v-model:value="row.value"
                 :key="row.id"
                 :conditions="conditions"
                 @delete="deleteRow(row)"
@@ -36,14 +36,8 @@
     import useFilterable from '@/composables/useFilterable'
 
     defineProps({
-        group: {
-            type: String,
-            required: true,
-        },
-        conditions: {
-            type: Array,
-            required: true,
-        },
+        group: { type: String, required: true },
+        conditions: { type: Array, required: true },
     })
 
     const rows = defineModel()

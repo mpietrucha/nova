@@ -1,5 +1,11 @@
 <template>
-    <SearchInput :options="options" @input="search = $event" @selected="value = $event">
+    <SearchInput
+        :options="options"
+        @input="search = $event"
+        @selected="value = $event"
+        v-model="value"
+        trackBy="name"
+    >
         <template #default>
             <div v-if="value" class="flex items-center">
                 {{ value.name }}
@@ -18,13 +24,10 @@
 </template>
 
 <script setup>
-    import { computed, onMounted, ref } from 'vue'
+    import { computed, nextTick, onMounted, ref, watch } from 'vue'
 
     const props = defineProps({
-        options: {
-            type: Array,
-            required: true,
-        },
+        options: { type: Array, required: true },
     })
 
     const value = defineModel()
@@ -46,4 +49,15 @@
 
         value.value = option
     })
+
+    watch(
+        () => props.options,
+        () => {
+            nextTick(() => {
+                if (options.value[0]) {
+                    value.value = options.value[0]
+                }
+            })
+        },
+    )
 </script>

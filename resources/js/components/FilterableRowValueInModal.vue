@@ -46,10 +46,7 @@
     import { watch } from 'vue'
 
     defineProps({
-        show: {
-            type: Boolean,
-            default: false,
-        },
+        show: { type: Boolean, default: false },
     })
 
     const emit = defineEmits(['close'])

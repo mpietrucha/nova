@@ -16,10 +16,7 @@
     import { computed } from 'vue'
 
     const props = defineProps({
-        filter: {
-            type: Object,
-            required: true,
-        },
+        filter: { type: Object, required: true },
     })
 
     const value = defineModel()

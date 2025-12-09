@@ -2,7 +2,7 @@
     <div class="pt-3 px-3">
         <div class="flex space-x-3">
             <div class="flex w-full">
-                <FilterableRowCondition v-model="condition" :conditions="conditions" />
+                <FilterableRowProperty v-model="property" :conditions="conditions" />
 
                 <FilterableRowFilter v-if="filters" v-model="filter" :filters="filters" />
 
@@ -28,21 +28,18 @@
 
 <script setup>
     import FilterableGroupButton from '@/components/FilterableGroupButton'
-    import FilterableRowCondition from '@/components/FilterableRowCondition'
     import FilterableRowFilter from '@/components/FilterableRowFilter'
+    import FilterableRowProperty from '@/components/FilterableRowProperty'
     import FilterableRowValue from '@/components/FilterableRowValue'
     import { computed } from 'vue'
 
     defineProps({
-        conditions: {
-            type: Array,
-            required: true,
-        },
+        conditions: { type: Array, required: true },
     })
 
-    const value = defineModel('value')
+    const property = defineModel('property')
     const filter = defineModel('filter')
-    const condition = defineModel('condition')
+    const value = defineModel('value')
 
-    const filters = computed(() => condition.value?.filters)
+    const filters = computed(() => property.value?.filters)
 </script>
