@@ -13,7 +13,7 @@ export const createRows = () => {
 }
 
 export const useRows = () => {
-    return useFilterableStorage(createRow, {
+    return useFilterableStorage(createRows, {
         name: 'rows',
     })
 }
