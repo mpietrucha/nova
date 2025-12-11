@@ -1,9 +1,8 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields\Group;
+namespace Mpietrucha\Nova\Enums;
 
-use BackedEnum;
-use Mpietrucha\Utility\Collection;
+use Mpietrucha\Nova\Enums\Contracts\InteractsWithEnumInterface;
 use Mpietrucha\Utility\Concerns\Compatible;
 use Mpietrucha\Utility\Contracts\CompatibleInterface;
 use Mpietrucha\Utility\Instance;
@@ -22,15 +21,13 @@ class Options implements CompatibleInterface
             return Value::for($callback)->array($input);
         }
 
-        $cases = $input::cases();
-
-        $options = Option::create($key, $value) |> Collection::create($cases)->map(...);
+        $options = Option::create($key, $value) |> $input::collection()->map(...);
 
         return $options->toArray();
     }
 
     protected static function compatibility(mixed $input): bool
     {
-        return Instance::is($input, BackedEnum::class);
+        return Instance::is($input, InteractsWithEnumInterface::class);
     }
 }

@@ -49,11 +49,11 @@ export const getRequestHandler = (options = null) => {
 }
 
 Nova.request = (options = null) => {
-    const request = getRequestHandler(options)
+    const request = getRequestHandler()
 
     request.interceptors.request.use(getRequestInterceptor())
 
-    return request
+    return options === null ? request : request(options)
 }
 
 export default () => {

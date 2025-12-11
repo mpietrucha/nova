@@ -1,12 +1,11 @@
 <?php
 
-namespace Mpietrucha\Nova\Fields\Group;
+namespace Mpietrucha\Nova\Enums;
 
-use BackedEnum;
 use Laravel\Nova\Nova;
+use Mpietrucha\Nova\Enums\Contracts\InteractsWithEnumInterface;
 use Mpietrucha\Utility\Concerns\Creatable;
 use Mpietrucha\Utility\Contracts\CreatableInterface;
-use Mpietrucha\Utility\Normalizer;
 
 class Option implements CreatableInterface
 {
@@ -19,10 +18,10 @@ class Option implements CreatableInterface
     /**
      * @return array<string, string>
      */
-    public function __invoke(BackedEnum $enum): array
+    public function __invoke(InteractsWithEnumInterface $enum): array
     {
         return [
-            $this->key() => $enum->value |> Normalizer::string(...),
+            $this->key() => $enum->value(),
             $this->value() => Nova::humanize($enum),
         ];
     }

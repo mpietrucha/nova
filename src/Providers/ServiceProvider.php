@@ -2,7 +2,9 @@
 
 namespace Mpietrucha\Nova\Providers;
 
+use Mpietrucha\Laravel\Filterable\Query;
 use Mpietrucha\Laravel\Package\Builder;
+use Mpietrucha\Nova\Cards\Filterable\Validator;
 
 class ServiceProvider extends \Mpietrucha\Laravel\Package\ServiceProvider
 {
@@ -15,5 +17,12 @@ class ServiceProvider extends \Mpietrucha\Laravel\Package\ServiceProvider
 
         $package->hasTranslations();
         $package->hasExternalTranslations('mpietrucha/laravel-filterable');
+    }
+
+    public function bootingPackage(): void
+    {
+        parent::bootingPackage();
+
+        Validator::create() |> Query::validate(...);
     }
 }
